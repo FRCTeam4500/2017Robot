@@ -41,4 +41,6 @@ public class RobotMap {
 								fOmniRatio = 1, 
 								bOmniRatio = 1;
 	
+	public static double visionData = 0;
+	
 }
