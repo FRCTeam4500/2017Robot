@@ -21,7 +21,7 @@ public class OmniDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//Robot.drivetrain.OmniDrive(Robot.oi.getJoyY(), Robot.oi.getJoyTwist());
-    	Robot.drivetrain.omniDrive(Math.pow(Robot.oi.getJoyX(), 2), Math.pow(Robot.oi.getJoyY(), 2), -Math.pow(Robot.oi.getJoyTwist(), 2), Robot.drivetrain.getGyroAngle());
+    	Robot.drivetrain.omniDrive2(Robot.oi.getJoyX(), Robot.oi.getJoyY(), Robot.oi.getJoyTwist());
     }
 
     // Make this return true when this Command no longer needs to run execute()

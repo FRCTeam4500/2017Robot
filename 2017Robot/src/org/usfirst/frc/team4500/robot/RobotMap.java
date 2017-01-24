@@ -10,7 +10,9 @@ import utilities.Vector;
  */
 public class RobotMap {
 	
-	public static final int LMOTOR = 0, RMOTOR = 1, FMOTOR = 2, BMOTOR = 3;
+	public static final int LMOTOR = 0, RMOTOR = 2;
+	
+	public static final int FSMOTOR = 3, BSMOTOR = 1;
 	
 	/**
 	 * The deadzone on the joystick
