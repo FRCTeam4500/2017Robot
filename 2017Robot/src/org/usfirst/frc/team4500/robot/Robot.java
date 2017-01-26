@@ -4,6 +4,7 @@ package org.usfirst.frc.team4500.robot;
 import java.io.IOException;
 
 import org.usfirst.frc.team4500.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team4500.robot.subsystems.GearGrabber;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -23,6 +24,7 @@ import utilities.VisionClient;
 public class Robot extends IterativeRobot {
 	
 	public static DriveTrain drivetrain;
+	public static GearGrabber gearGrabber;
 	
 	public static VisionClient visionServer;
 	public static OI oi;
@@ -38,6 +40,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		drivetrain = new DriveTrain();
+		gearGrabber = new GearGrabber();
 		
 		try {
 			visionServer = new VisionClient((short) 1234);

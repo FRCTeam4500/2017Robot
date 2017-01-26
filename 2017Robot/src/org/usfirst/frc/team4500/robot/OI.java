@@ -1,7 +1,11 @@
 package org.usfirst.frc.team4500.robot;
 
+import org.usfirst.frc.team4500.robot.commands.Grabber_Grab;
+import org.usfirst.frc.team4500.robot.commands.Grabber_LetGo;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -11,9 +15,16 @@ public class OI {
 	
 	Joystick driveStick, stickTwo;
 	
+	Button grab, letGo;
+	
 	public OI() {
 		driveStick = new Joystick(0);
 		stickTwo = new Joystick(1);
+		
+		grab = new JoystickButton(driveStick, 0);
+		grab.whenPressed(new Grabber_Grab());
+		letGo = new JoystickButton(driveStick, 0);
+		letGo.whenPressed(new Grabber_LetGo());
 	}
 	
 	/**
