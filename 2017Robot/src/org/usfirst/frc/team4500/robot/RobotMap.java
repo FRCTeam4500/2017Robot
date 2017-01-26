@@ -19,4 +19,6 @@ public class RobotMap {
 	 */
 	public static final double DEADZONE = .05;
 	
+	public static final double MOTOR_POWER = 0.8;
+	
 }

@@ -40,34 +40,42 @@ public class DriveTrain extends Subsystem {
 	}
     
     public void omniDrive2(double joyX, double joyY, double joyTwist) {
-    	if(joyY > 0.15) {
-    		lOmni.set(0.2);
-    		rOmni.set(0.2);
-    	} else if(joyY < -0.15) {
-    		lOmni.set(-0.2);
-    		rOmni.set(-0.2);
+    	
+    	double deadzone = RobotMap.DEADZONE;
+    	//Deadzone defined in Robot Map
+		
+    	
+    	//Forward / Backward functions
+    	if(joyY > deadzone) {
+    		lOmni.set(joyY);
+    		rOmni.set(joyY);
+    	} else if(joyY < -deadzone) {
+    		lOmni.set(-joyY);
+    		rOmni.set(-joyY);
     	} else {
     		lOmni.set(0);
     		rOmni.set(0);
     	}
     	
-    	if(joyX > 0.15) {
-    		fsOmni.set(0.2);
-    		bsOmni.set(0.2);
-    	} else if(joyX < -0.15) {
-    		fsOmni.set(-0.2);
-    		bsOmni.set(-0.2);
+    	//Strafe functions
+    	if(joyX > deadzone) {
+    		fsOmni.set(joyX);
+    		bsOmni.set(joyX);
+    	} else if(joyX < -deadzone) {
+    		fsOmni.set(-joyX);
+    		bsOmni.set(-joyX);
     	} else {
     		fsOmni.set(0);
     		bsOmni.set(0);
     	}
     	
-    	if(joyTwist > 0.15) {
-    		lOmni.set(-0.2);
-    		rOmni.set(0.2);
-    	} else if(joyTwist < -0.15) {
-    		lOmni.set(0.2);
-    		rOmni.set(-0.2);
+    	//Turn functions
+    	if(joyTwist > deadzone) {
+    		lOmni.set(joyTwist);
+    		rOmni.set(-joyTwist);
+    	} else if(joyTwist < -deadzone) {
+    		lOmni.set(joyTwist);
+    		rOmni.set(-joyTwist);
     	} else {
     		lOmni.set(0);
     		rOmni.set(0);
