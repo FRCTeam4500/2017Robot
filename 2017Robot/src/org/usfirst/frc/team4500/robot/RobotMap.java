@@ -14,15 +14,15 @@ public class RobotMap {
 	
 	public static final int FSMOTOR = 2, BSMOTOR = 3;
 	
-	public static final int HORIZMOTOR = 0, FIREMOTOR = 1, FEEDMOTOR = 2;
+	public static final int HORIZMOTOR = 4, FIREMOTOR = 5, FEEDMOTOR = 6;
 	
-	public static final int GRABBERSOL_1 = 0, GRABBERSOL_2 = 0;
+	public static final int GRABBERSOL_1 = 1, GRABBERSOL_2 = 2;
 	
-	public static final int BALLGRABMOTOR = 0;
+	public static final int BALLGRABMOTOR = 7;
 	
 	/**
 	 * The deadzone on the joystick
 	 */
-	public static final double DEADZONE = 0.2;
+	public static final double DEADZONE = 0.1;
 	
 }

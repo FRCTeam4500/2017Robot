@@ -42,11 +42,10 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		oi = new OI();
 		drivetrain = new DriveTrain();
-		//cannon = new Cannon();
-		//ballgrabber = new BallGrabber();
-		//geargrabber = new GearGrabber();
+		cannon = new Cannon();
+		ballgrabber = new BallGrabber();
+		geargrabber = new GearGrabber();
 		
 		try {
 			visionServer = new VisionClient((short) 1234);
@@ -55,6 +54,8 @@ public class Robot extends IterativeRobot {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		oi = new OI();
 	}
 
 	/**
