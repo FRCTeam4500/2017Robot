@@ -18,6 +18,8 @@ public class RobotMap {
 	
 	public static final int GRABBERSOL_1 = 0, GRABBERSOL_2 = 0;
 	
+	public static final int BALLGRABMOTOR = 0;
+	
 	/**
 	 * The deadzone on the joystick
 	 */

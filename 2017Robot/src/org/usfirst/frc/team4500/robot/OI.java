@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4500.robot;
 
+import org.usfirst.frc.team4500.robot.commands.BallGrabber_Grab;
 import org.usfirst.frc.team4500.robot.commands.Cannon_MoveLeft;
 import org.usfirst.frc.team4500.robot.commands.Cannon_MoveRight;
 
@@ -16,6 +17,7 @@ public class OI {
 	Joystick driveStick, shootStick;
 	
 	Button moveCannonLeft, moveCannonRight;
+	Button grabBall;
 	
 	
 	
@@ -30,6 +32,10 @@ public class OI {
 		moveCannonRight = new JoystickButton(shootStick, 5);
 		moveCannonRight.whileHeld(new Cannon_MoveRight(0.2));
 		moveCannonRight.whenReleased(new Cannon_MoveRight(0));
+		
+		grabBall = new JoystickButton(shootStick, 0);
+		grabBall.whileHeld(new BallGrabber_Grab(0.5));
+		grabBall.whenReleased(new BallGrabber_Grab(0));
 	}
 	
 	/**

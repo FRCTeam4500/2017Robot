@@ -7,14 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Cannon_MoveLeft extends Command {
-	
-	double speed = 0;
+public class GearGrabber_Letgo extends Command {
 
-    public Cannon_MoveLeft(double speed) {
+    public GearGrabber_Letgo() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.cannon);
-        this.speed = speed;
+        requires(Robot.geargrabber);
     }
 
     // Called just before this Command runs the first time
@@ -23,7 +20,7 @@ public class Cannon_MoveLeft extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.cannon.moveHorizontally(speed);
+    	Robot.geargrabber.grabberReverse();
     }
 
     // Make this return true when this Command no longer needs to run execute()
