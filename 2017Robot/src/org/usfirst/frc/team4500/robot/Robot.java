@@ -113,6 +113,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		SmartDashboard.putNumber("JoyX", Robot.oi.getJoyX());
 		double data = visionServer.getData();
         SmartDashboard.putNumber("Server data", data);
 		
