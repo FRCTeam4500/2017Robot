@@ -10,15 +10,15 @@ import utilities.Vector;
  */
 public class RobotMap {
 	
-	public static final int LMOTOR = 0, RMOTOR = 2;
+	public static final int LMOTOR = 0, RMOTOR = 1;
 	
-	public static final int FSMOTOR = 3, BSMOTOR = 1;
+	public static final int FSMOTOR = 2, BSMOTOR = 3;
 	
 	public static final int HORIZMOTOR = 0, FIREMOTOR = 1, FEEDMOTOR = 2;
 	
 	/**
 	 * The deadzone on the joystick
 	 */
-	public static final double DEADZONE = .05;
+	public static final double DEADZONE = 0.2;
 	
 }

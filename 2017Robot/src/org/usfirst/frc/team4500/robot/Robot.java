@@ -40,7 +40,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		drivetrain = new DriveTrain();
-		cannon = new Cannon();
+		//cannon = new Cannon();
 		
 		try {
 			visionServer = new VisionClient((short) 1234);
