@@ -7,11 +7,14 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class OmniDrive extends Command {
+public class Cannon_MoveLeft extends Command {
+	
+	double speed = 0;
 
-    public OmniDrive() {
+    public Cannon_MoveLeft(double speed) {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.drivetrain);
+        requires(Robot.cannon);
+        this.speed = speed;
     }
 
     // Called just before this Command runs the first time
@@ -20,8 +23,7 @@ public class OmniDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//Robot.drivetrain.OmniDrive(Robot.oi.getJoyY(), Robot.oi.getJoyTwist());
-    	Robot.drivetrain.omniDrive(Robot.oi.getJoyX(), Robot.oi.getJoyY(), Robot.oi.getJoyTwist());
+    	Robot.cannon.moveHorizontally(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

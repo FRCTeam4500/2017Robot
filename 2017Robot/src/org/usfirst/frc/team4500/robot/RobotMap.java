@@ -14,6 +14,8 @@ public class RobotMap {
 	
 	public static final int FSMOTOR = 3, BSMOTOR = 1;
 	
+	public static final int HORIZMOTOR = 0, FIREMOTOR = 1, FEEDMOTOR = 2;
+	
 	/**
 	 * The deadzone on the joystick
 	 */

@@ -3,6 +3,7 @@ package org.usfirst.frc.team4500.robot;
 
 import java.io.IOException;
 
+import org.usfirst.frc.team4500.robot.subsystems.Cannon;
 import org.usfirst.frc.team4500.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -23,6 +24,7 @@ import utilities.VisionClient;
 public class Robot extends IterativeRobot {
 	
 	public static DriveTrain drivetrain;
+	public static Cannon cannon;
 	
 	public static VisionClient visionServer;
 	public static OI oi;
@@ -38,6 +40,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		drivetrain = new DriveTrain();
+		cannon = new Cannon();
 		
 		try {
 			visionServer = new VisionClient((short) 1234);
@@ -113,6 +116,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		SmartDashboard.putNumber("Scroll", oi.getJoyScroll());
 		SmartDashboard.putNumber("JoyX", Robot.oi.getJoyX());
 		double data = visionServer.getData();
         SmartDashboard.putNumber("Server data", data);

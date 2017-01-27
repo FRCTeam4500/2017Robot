@@ -38,7 +38,7 @@ public class DriveTrain extends Subsystem {
 //		return gyro.getAngle();
 //	}
     
-    public void omniDrive2(double joyX, double joyY, double joyTwist) {
+    public void omniDrive(double joyX, double joyY, double joyTwist) {
     	if(joyY > 0.05) {
     		SmartDashboard.putString("In Y+", "Yes");
     		lOmni.set(1);
