@@ -39,11 +39,11 @@ public class DriveTrain extends Subsystem {
 //	}
     
     public void omniDrive(double joyX, double joyY, double joyTwist) {
-    	if(joyY > 0.05) {
+    	if(joyY > 0.1) {
     		SmartDashboard.putString("In Y+", "Yes");
     		lOmni.set(1);
     		rOmni.set(1);
-    	} else if(joyY < -0.05) {
+    	} else if(joyY < -0.1) {
     		SmartDashboard.putString("In Y-", "Yes");
     		lOmni.set(-1);
     		rOmni.set(-1);
@@ -52,11 +52,11 @@ public class DriveTrain extends Subsystem {
     		rOmni.set(0);
     	}
     	
-    	if(joyX > 0.05) {
+    	if(joyX > 0.1) {
     		SmartDashboard.putString("In X+", "Yes");
     		fsOmni.set(1);
     		bsOmni.set(1);
-    	} else if(joyX < -0.05) {
+    	} else if(joyX < -0.1) {
     		SmartDashboard.putString("In X-", "Yes");
     		fsOmni.set(-1);
     		bsOmni.set(-1);
@@ -65,10 +65,10 @@ public class DriveTrain extends Subsystem {
     		bsOmni.set(0);
     	}
     	
-    	if(joyTwist > 0.05) {
+    	if(joyTwist > 0.1) {
     		lOmni.set(-1);
     		rOmni.set(1);
-    	} else if(joyTwist < -0.05) {
+    	} else if(joyTwist < -0.1) {
     		lOmni.set(1);
     		rOmni.set(-1);
     	} else {
