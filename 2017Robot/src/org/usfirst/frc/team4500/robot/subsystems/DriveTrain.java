@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4500.robot.subsystems;
 
+import org.usfirst.frc.team4500.robot.Robot;
 import org.usfirst.frc.team4500.robot.RobotMap;
 import org.usfirst.frc.team4500.robot.commands.OmniDrive;
 
@@ -39,12 +40,14 @@ public class DriveTrain extends Subsystem {
 		return gyro.getAngle();
 	}
     
-    public void omniDrive2(double joyX, double joyY, double joyTwist) {
+    public void Omnidrive(double joyX, double joyY, double joyTwist) {
     	
-    	double deadzone = RobotMap.DEADZONE;
+    	//double deadzone = RobotMap.DEADZONE;
     	//Deadzone defined in Robot Map
-		
     	
+    	lOmni.set(Robot.oi.getJoyY());
+    	
+    	/*
     	//Forward / Backward functions
     	if(joyY > deadzone) {
     		lOmni.set(joyY);
@@ -80,6 +83,13 @@ public class DriveTrain extends Subsystem {
     		lOmni.set(0);
     		rOmni.set(0);
     	}
+    */
     }
+
+	public void OmniDrive(double joyY, double joyY2) {
+
+		
+	}
+    
 }
 

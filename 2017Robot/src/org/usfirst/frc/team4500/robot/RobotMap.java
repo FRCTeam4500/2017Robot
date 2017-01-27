@@ -10,7 +10,7 @@ import utilities.Vector;
  */
 public class RobotMap {
 	
-	public static final int LMOTOR = 0, RMOTOR = 1;
+	public static final int LMOTOR = 5, RMOTOR = 1;
 	
 	public static final int FSMOTOR = 2, BSMOTOR = 3;
 	
