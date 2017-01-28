@@ -24,6 +24,9 @@ public class BallGrabber extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
+    /*
+     * Turns on the motor to bring balls into the storage
+     */
     public void grabBall(double speed) {
     	grabberMotor.set(speed);
     }

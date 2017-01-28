@@ -24,10 +24,16 @@ public class GearGrabber extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
+    /**
+     * Extends the pistons forward to grab a gear
+     */
     public void grabberForward() {
     	grabber.set(Value.kForward);
     }
     
+    /**
+     * Retracts the pistons to let go of a gear
+     */
     public void grabberReverse() {
     	grabber.set(Value.kReverse);
     }

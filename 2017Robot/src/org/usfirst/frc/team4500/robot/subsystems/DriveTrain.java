@@ -39,6 +39,13 @@ public class DriveTrain extends Subsystem {
 //		return gyro.getAngle();
 //	}
     
+    /**
+     * Function for driving the robot. If there is no twist then move forward, backwards or strafe
+     * If there is twist then rotate the robot.
+     * @param joyX
+     * @param joyY
+     * @param joyTwist
+     */
     public void omniDrive(double joyX, double joyY, double joyTwist) {
     	if (joyTwist == 0) {
     		fsOmni.set(joyX);

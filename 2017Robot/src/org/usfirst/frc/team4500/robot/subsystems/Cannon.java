@@ -27,12 +27,29 @@ public class Cannon extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
+    /**
+     * Moves the robot's turret horizontally. 
+     * If the value is positive then move right. If it's negative then move left
+     * @param speed
+     */
     public void moveHorizontally(double speed) {
     	horizMotor.set(speed);
     }
     
-    public void cannonSpinup(double speed) {
+    /**
+     * Starts spinning the turret's fire motor.
+     * @param speed
+     */
+    public void fireSpinup(double speed) {
     	fireMotor.set(speed);
+    }
+    
+    /**
+     * Enables the motor for feeding balls up to the turret
+     * @param speed
+     */
+    public void feederStartup(double speed) {
+    	feedMotor.set(speed);
     }
 }
 

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4500.robot;
 
 import org.usfirst.frc.team4500.robot.commands.BallGrabber_Grab;
+import org.usfirst.frc.team4500.robot.commands.Cannon_Feed;
 import org.usfirst.frc.team4500.robot.commands.Cannon_MoveLeft;
 import org.usfirst.frc.team4500.robot.commands.Cannon_MoveRight;
 
@@ -16,7 +17,7 @@ public class OI {
 	
 	Joystick driveStick, shootStick;
 	
-	Button moveCannonLeft, moveCannonRight;
+	Button moveCannonLeft, moveCannonRight, feedBall;
 	Button grabBall;
 	
 	
@@ -25,6 +26,7 @@ public class OI {
 		driveStick = new Joystick(0);
 		shootStick = new Joystick(1);
 		
+		// Buttons for the Cannon subsystem
 		moveCannonLeft = new JoystickButton(shootStick, 4);
 		moveCannonLeft.whileHeld(new Cannon_MoveLeft(0.2));
 		moveCannonLeft.whenReleased(new Cannon_MoveLeft(0));
@@ -33,6 +35,12 @@ public class OI {
 		moveCannonRight.whileHeld(new Cannon_MoveRight(0.2));
 		moveCannonRight.whenReleased(new Cannon_MoveRight(0));
 		
+		feedBall = new JoystickButton(shootStick, 6);
+		feedBall.whileHeld(new Cannon_Feed(0.5));
+		feedBall.whenReleased(new Cannon_Feed(0));
+		
+		
+		// Buttons for the BallGrabber subsystem
 		grabBall = new JoystickButton(shootStick, 0);
 		grabBall.whileHeld(new BallGrabber_Grab(0.5));
 		grabBall.whenReleased(new BallGrabber_Grab(0));
@@ -56,13 +64,18 @@ public class OI {
 
 	/**
 	 * The value of the twist axis of the joystick, adjusted for deadzones and any necessary scaling
-	 * @return twist value from joystick (-1 to 1)
+	 * @return the value from joystick (-1 to 1)
 	 */
 	public double getJoyTwist() {
 		return ((Math.abs(driveStick.getTwist()) < RobotMap.DEADZONE) ? 0 : driveStick.getTwist());
 	}
 	
+	/**
+	 * Gets the joystick's scroll and converts it from the range -1-1 to 0-1
+	 * @return The value of the scroll in the range 0-1
+	 */
 	public double getJoyScroll() {
-		return shootStick.getZ();
+		return ((shootStick.getZ()-(-1))*1)/2;
+		//return shootStick.getZ();
 	}
 }

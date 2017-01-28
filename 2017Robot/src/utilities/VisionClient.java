@@ -17,6 +17,10 @@ public class VisionClient implements Runnable {
 		data = 0;
 	}
 	
+	/**
+	 * Grabs the data from the coprocessor using UDP protocol.
+	 * Note that this MUST RUN in a separate thread since it uses a while loop.
+	 */
 	@Override
 	public void run() {
 		while(true) {
@@ -38,6 +42,10 @@ public class VisionClient implements Runnable {
 		}
 	}
 	
+	/*
+	 * Function for getting the current data from the coprocessor
+	 * Returns the data retrieved from the coprocessor
+	 */
 	public double getData() {
 		double data = 0.0;
 		try {

@@ -48,6 +48,9 @@ public class Robot extends IterativeRobot {
 		ballgrabber = new BallGrabber();
 		geargrabber = new GearGrabber();
 		
+		/* Trys to enable the vision server and start a separate thread for it
+		 * If it encounters an error then it will through an IOException
+		 */
 		try {
 			visionServer = new VisionClient((short) 1234);
 			Thread t = new Thread(visionServer);
