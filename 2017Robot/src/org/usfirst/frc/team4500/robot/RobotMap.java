@@ -12,10 +12,10 @@ public class RobotMap {
 	
 	public static final int LMOTOR = 0, RMOTOR = 1;
 	
-	public static final int FSMOTOR = 2, BSMOTOR = 3;
+	public static final int FSMOTOR = 2, BSMOTOR = 4;
 	
-	public static final int HORIZMOTOR = 4, FIREMOTOR = 5, FEEDMOTOR = 6;
-	
+	public static final int HORIZMOTOR = 3, FIREMOTOR = 5, FEEDMOTOR = 6;
+
 	public static final int GRABBERSOL_1 = 1, GRABBERSOL_2 = 2;
 	
 	public static final int BALLGRABMOTOR = 7;

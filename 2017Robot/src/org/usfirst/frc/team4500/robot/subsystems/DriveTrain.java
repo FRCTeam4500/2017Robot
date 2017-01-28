@@ -4,6 +4,7 @@ import org.usfirst.frc.team4500.robot.RobotMap;
 import org.usfirst.frc.team4500.robot.commands.OmniDrive;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -15,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class DriveTrain extends Subsystem {
 	
 	private Talon lOmni, rOmni;
-	private Talon fsOmni, bsOmni;
+	private Spark fsOmni, bsOmni;
 	
 	//private ADXRS450_Gyro gyro;
 	
@@ -23,8 +24,8 @@ public class DriveTrain extends Subsystem {
 		lOmni = new Talon(RobotMap.LMOTOR);
     	rOmni = new Talon(RobotMap.RMOTOR);
     	
-    	fsOmni = new Talon(RobotMap.FSMOTOR);
-    	bsOmni = new Talon(RobotMap.BSMOTOR);
+    	fsOmni = new Spark(RobotMap.FSMOTOR);
+    	bsOmni = new Spark(RobotMap.BSMOTOR);
     	
     	//gyro = new ADXRS450_Gyro(); 	
 	}
@@ -39,10 +40,17 @@ public class DriveTrain extends Subsystem {
 //	}
     
     public void omniDrive(double joyX, double joyY, double joyTwist) {
-		fsOmni.set(joyX);
-		bsOmni.set(joyX);
-		lOmni.set(joyY);
-		rOmni.set(joyY);
+    	if (joyTwist == 0) {
+    		fsOmni.set(joyX);
+    		bsOmni.set(joyX);
+    		lOmni.set(joyY);
+    		rOmni.set(joyY);
+    	} else if(joyTwist > 0.3 || joyTwist < -0.3) {
+    		fsOmni.set(joyX);
+    		bsOmni.set(joyX);
+    		lOmni.set(joyTwist);
+    		rOmni.set(-joyTwist);
+    	} 
 //    	if(joyTwist == 0) {
 //    		lOmni.set(0);
 //    		rOmni.set(0);
