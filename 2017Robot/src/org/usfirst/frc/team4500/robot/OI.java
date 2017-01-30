@@ -4,6 +4,7 @@ import org.usfirst.frc.team4500.robot.commands.BallGrabber_Grab;
 import org.usfirst.frc.team4500.robot.commands.Cannon_Feed;
 import org.usfirst.frc.team4500.robot.commands.Cannon_MoveLeft;
 import org.usfirst.frc.team4500.robot.commands.Cannon_MoveRight;
+import org.usfirst.frc.team4500.robot.commands.Group_Fire;
 import org.usfirst.frc.team4500.robot.subsystems.Functions;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -18,7 +19,7 @@ public class OI {
 	
 	Joystick driveStick, shootStick;
 	
-	Button moveCannonLeft, moveCannonRight, feedBall;
+	Button moveCannonLeft, moveCannonRight, feedBall, fireGroup;
 	Button grabBall;
 	
 	
@@ -40,10 +41,14 @@ public class OI {
 		feedBall.whileHeld(new Cannon_Feed(0.5));
 		feedBall.whenReleased(new Cannon_Feed(0));
 		
+		fireGroup = new JoystickButton(shootStick, 1);
+		fireGroup.whileHeld(new Group_Fire(1));
+		fireGroup.whenReleased(new Group_Fire(0));
+		
 		
 		// Buttons for the BallGrabber subsystem
-		grabBall = new JoystickButton(shootStick, 0);
-		grabBall.whileHeld(new BallGrabber_Grab(0.5));
+		grabBall = new JoystickButton(shootStick, 2);
+		grabBall.whileHeld(new BallGrabber_Grab(-0.5));
 		grabBall.whenReleased(new BallGrabber_Grab(0));
 	}
 	
