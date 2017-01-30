@@ -47,17 +47,30 @@ public class DriveTrain extends Subsystem {
      * @param joyTwist
      */
     public void omniDrive(double joyX, double joyY, double joyTwist) {
-    	if (joyTwist == 0) {
+    	if(joyTwist > 0.3 || joyTwist < -0.3) {
+    		fsOmni.set(-joyX);
+    		bsOmni.set(joyX);
+    		lOmni.set(-joyTwist);
+    		rOmni.set(-joyTwist);
+    	} else {
+    		fsOmni.set(-joyX);
+    		bsOmni.set(joyX);
+    		lOmni.set(joyY);
+    		rOmni.set(-joyY);
+    	} 
+    	
+    	/*if (joyTwist == 0) {
     		fsOmni.set(joyX);
     		bsOmni.set(joyX);
     		lOmni.set(joyY);
-    		rOmni.set(joyY);
+    		rOmni.set(-joyY);
     	} else if(joyTwist > 0.3 || joyTwist < -0.3) {
     		fsOmni.set(joyX);
     		bsOmni.set(joyX);
     		lOmni.set(joyTwist);
-    		rOmni.set(-joyTwist);
-    	} 
+    		rOmni.set(joyTwist);
+    	}  */
+    	
 //    	if(joyTwist == 0) {
 //    		lOmni.set(0);
 //    		rOmni.set(0);

@@ -9,9 +9,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Cannon_Spinup extends Command {
 	
-	double speed = 0;
 
-    public Cannon_Spinup(double speed) {
+    public Cannon_Spinup() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.cannon);
     }
