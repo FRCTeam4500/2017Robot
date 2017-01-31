@@ -4,6 +4,10 @@ import org.usfirst.frc.team4500.robot.commands.BallGrabber_Grab;
 import org.usfirst.frc.team4500.robot.commands.Cannon_Feed;
 import org.usfirst.frc.team4500.robot.commands.Cannon_MoveLeft;
 import org.usfirst.frc.team4500.robot.commands.Cannon_MoveRight;
+import org.usfirst.frc.team4500.robot.commands.GearGrabber_Extend;
+import org.usfirst.frc.team4500.robot.commands.GearGrabber_Grab;
+import org.usfirst.frc.team4500.robot.commands.GearGrabber_Letgo;
+import org.usfirst.frc.team4500.robot.commands.GearGrabber_Retract;
 import org.usfirst.frc.team4500.robot.commands.Group_Fire;
 import org.usfirst.frc.team4500.robot.subsystems.Functions;
 
@@ -21,6 +25,8 @@ public class OI {
 	
 	Button moveCannonLeft, moveCannonRight, feedBall, fireGroup;
 	Button grabBall;
+	Button grabGear, letGoGear;
+	Button extendPanel, retractPanel;
 	
 	
 	
@@ -50,6 +56,16 @@ public class OI {
 		grabBall = new JoystickButton(shootStick, 2);
 		grabBall.whileHeld(new BallGrabber_Grab(-0.5));
 		grabBall.whenReleased(new BallGrabber_Grab(0));
+		
+		// Buttons for the GearGrabber
+		grabGear = new JoystickButton(shootStick, 5);
+		grabGear.whenPressed(new GearGrabber_Grab());
+		letGoGear = new JoystickButton(shootStick, 6);
+		letGoGear.whenPressed(new GearGrabber_Letgo());
+		extendPanel = new JoystickButton(shootStick, 7);
+		extendPanel.whenPressed(new GearGrabber_Extend());
+		retractPanel = new JoystickButton(shootStick, 8);
+		retractPanel.whenPressed(new GearGrabber_Retract());
 	}
 	
 	/**
