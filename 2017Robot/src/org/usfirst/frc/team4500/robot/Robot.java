@@ -131,6 +131,7 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		SmartDashboard.putNumber("Scroll", oi.getJoyScroll());
 		SmartDashboard.putNumber("JoyX", Robot.oi.getJoyX());
+		SmartDashboard.putNumber("JoyY", Robot.oi.getJoyY());
 		SmartDashboard.putNumber("JoyTwist", Robot.oi.getJoyTwist());
 		double data = visionServer.getData();
         SmartDashboard.putNumber("Server data", data);

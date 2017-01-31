@@ -4,6 +4,8 @@ import org.usfirst.frc.team4500.robot.commands.BallGrabber_Grab;
 import org.usfirst.frc.team4500.robot.commands.Cannon_Feed;
 import org.usfirst.frc.team4500.robot.commands.Cannon_MoveLeft;
 import org.usfirst.frc.team4500.robot.commands.Cannon_MoveRight;
+import org.usfirst.frc.team4500.robot.commands.Group_Fire;
+import org.usfirst.frc.team4500.robot.subsystems.Functions;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -17,7 +19,7 @@ public class OI {
 	
 	Joystick driveStick, shootStick;
 	
-	Button moveCannonLeft, moveCannonRight, feedBall;
+	Button moveCannonLeft, moveCannonRight, feedBall, fireGroup;
 	Button grabBall;
 	
 	
@@ -28,21 +30,25 @@ public class OI {
 		
 		// Buttons for the Cannon subsystem
 		moveCannonLeft = new JoystickButton(shootStick, 4);
-		moveCannonLeft.whileHeld(new Cannon_MoveLeft(0.2));
+		moveCannonLeft.whileHeld(new Cannon_MoveLeft(0.3));
 		moveCannonLeft.whenReleased(new Cannon_MoveLeft(0));
 		
 		moveCannonRight = new JoystickButton(shootStick, 5);
-		moveCannonRight.whileHeld(new Cannon_MoveRight(0.2));
+		moveCannonRight.whileHeld(new Cannon_MoveRight(-0.3));
 		moveCannonRight.whenReleased(new Cannon_MoveRight(0));
 		
-		feedBall = new JoystickButton(shootStick, 6);
+		feedBall = new JoystickButton(shootStick, 3);
 		feedBall.whileHeld(new Cannon_Feed(0.5));
 		feedBall.whenReleased(new Cannon_Feed(0));
 		
+		fireGroup = new JoystickButton(shootStick, 1);
+		fireGroup.whileHeld(new Group_Fire(1));
+		fireGroup.whenReleased(new Group_Fire(0));
+		
 		
 		// Buttons for the BallGrabber subsystem
-		grabBall = new JoystickButton(shootStick, 0);
-		grabBall.whileHeld(new BallGrabber_Grab(0.5));
+		grabBall = new JoystickButton(shootStick, 2);
+		grabBall.whileHeld(new BallGrabber_Grab(-0.5));
 		grabBall.whenReleased(new BallGrabber_Grab(0));
 	}
 	
@@ -51,7 +57,14 @@ public class OI {
 	 * @return x value from joystick (-1 to 1)
 	 */
 	public double getJoyX() {
-		return (Math.abs(driveStick.getX()) < RobotMap.DEADZONE) ? 0 : driveStick.getX();
+		double xSquared = driveStick.getX();
+		if(xSquared > 0) {
+			return (Math.abs(driveStick.getX()) < RobotMap.DEADZONE) ? 0 : Math.pow(driveStick.getX(), 2);
+		} else {
+			return (Math.abs(driveStick.getX()) < RobotMap.DEADZONE) ? 0 : xSquared*-xSquared;
+		}
+		//return (Math.abs(driveStick.getX()) < RobotMap.DEADZONE) ? 0 : driveStick.getX();
+		//return (Math.abs(driveStick.getX()) < RobotMap.DEADZONE) ? 0 : Math.pow(driveStick.getX(), 2);
 	}
 
 	/**
@@ -59,7 +72,13 @@ public class OI {
 	 * @return y value from joystick (-1 to 1)
 	 */
 	public double getJoyY() {
-		return (Math.abs(driveStick.getY()) < RobotMap.DEADZONE) ? 0 : driveStick.getY();
+		double ySquared = driveStick.getY();
+		if(ySquared > 0) {
+			return (Math.abs(driveStick.getY()) < RobotMap.DEADZONE) ? 0 : Math.pow(driveStick.getY(), 2);
+		} else {
+			return (Math.abs(driveStick.getY()) < RobotMap.DEADZONE) ? 0 : ySquared*-ySquared;
+		}
+		//return (Math.abs(driveStick.getY()) < RobotMap.DEADZONE) ? 0 : driveStick.getY();
 	}
 
 	/**
@@ -67,7 +86,15 @@ public class OI {
 	 * @return the value from joystick (-1 to 1)
 	 */
 	public double getJoyTwist() {
-		return ((Math.abs(driveStick.getTwist()) < RobotMap.DEADZONE) ? 0 : driveStick.getTwist());
+		double twist = driveStick.getTwist();
+		if(twist > 0){
+			return (Math.abs(driveStick.getTwist()) < RobotMap.TWISTDEADZONE) ? 0 : Math.pow(Functions.cvtRange(0.6, 1, 0, 1, driveStick.getTwist()), 2);
+		} else {
+			twist = Functions.cvtRange(-0.6, -1, 0, -1, driveStick.getTwist());
+			return (Math.abs(driveStick.getTwist()) < RobotMap.TWISTDEADZONE) ? 0 : twist * -twist;
+		}
+		//return ((Math.abs(driveStick.getTwist()) < RobotMap.DEADZONE) ? 0 : driveStick.getTwist());
+		//return (Math.abs(driveStick.getTwist()) < RobotMap.TWISTDEADZONE) ? 0 : Math.pow(Functions.cvtRange(0.6, 1, 0, 1, driveStick.getTwist()), 2);
 	}
 	
 	/**
@@ -75,7 +102,8 @@ public class OI {
 	 * @return The value of the scroll in the range 0-1
 	 */
 	public double getJoyScroll() {
-		return ((shootStick.getZ()-(-1))*1)/2;
+		//return ((shootStick.getZ()-(-1))*1)/2;
 		//return shootStick.getZ();
+		return Functions.cvtRange(-1, 1, 0, 1, shootStick.getZ());
 	}
 }

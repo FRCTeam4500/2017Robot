@@ -7,11 +7,13 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Cannon_Spinup extends Command {
+public class Cannon_FireMax extends Command {
 	
+	double speed = 0;
 
-    public Cannon_Spinup() {
+    public Cannon_FireMax(double speed) {
         // Use requires() here to declare subsystem dependencies
+    	this.speed = speed;
         requires(Robot.cannon);
     }
 
@@ -21,12 +23,12 @@ public class Cannon_Spinup extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.cannon.fireSpinup(Robot.oi.getJoyScroll());
+    	Robot.cannon.fireSpinup(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
