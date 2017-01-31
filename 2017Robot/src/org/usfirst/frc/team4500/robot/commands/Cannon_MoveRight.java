@@ -25,7 +25,7 @@ public class Cannon_MoveRight extends Command {
     protected void execute() {
     	Robot.cannon.moveHorizontally(speed);
     }
-
+    
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return true;
