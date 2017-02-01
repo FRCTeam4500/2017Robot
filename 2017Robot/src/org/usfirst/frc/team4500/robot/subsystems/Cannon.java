@@ -20,7 +20,7 @@ public class Cannon extends Subsystem {
 	public Cannon() {
 		horizMotor = new Talon(RobotMap.HORIZMOTOR);
 		fireMotor = new Talon(RobotMap.FIREMOTOR);
-		feedMotor = new Talon(RobotMap.ELEVATORMOTOR);
+		feedMotor = new Talon(RobotMap.FEEDMOTOR);
 	}
 
     public void initDefaultCommand() {
