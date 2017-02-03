@@ -22,9 +22,9 @@ public class RobotMap {
 	public static final int FUNNELMOTOR = 9;
 	
 	// Pneumatic ports
-	public static final int GRABBERSOL_1 = 1, GRABBERSOL_2 = 2;
+	public static final int GRABBERSOL_1 = 0, GRABBERSOL_2 = 1;
 	
-	public static final int PANELSOL_1 = 3, PANELSOL_2 = 4;
+	public static final int PANELSOL_1 = 2, PANELSOL_2 = 3;
 	
 	public static final int COMPRESSOR = 0;
 	
