@@ -7,7 +7,8 @@ package org.usfirst.frc.team4500.robot;
  * floating around.
  */
 public class RobotMap {
-	//motors
+	
+	// Motor ports
 	public static final int LMOTOR = 0, RMOTOR = 1;
 	
 	public static final int FSMOTOR = 3, BSMOTOR = 2;
@@ -15,16 +16,17 @@ public class RobotMap {
 	public static final int HORIZMOTOR = 5, FIREMOTOR = 4, FEEDMOTOR = 6;
 	
 	public static final int BALLGRABMOTOR = 7;
-	//pneumatics
+	
+	public static final int CLIMBMOTOR = 8;
+	
+	// Pneumatic ports
 	public static final int GRABBERSOL_1 = 1, GRABBERSOL_2 = 2;
 	
 	public static final int PANELSOL_1 = 3, PANELSOL_2 = 4;
 	
 	public static final int COMPRESSOR = 0;
 	
-	/**
-	 * The deadzone on the joystick
-	 */
+	// Others
 	public static final double DEADZONE = 0.4;
 	public static final double TWISTDEADZONE = 0.6;
 	

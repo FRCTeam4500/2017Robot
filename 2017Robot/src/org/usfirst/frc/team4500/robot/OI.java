@@ -4,6 +4,7 @@ import org.usfirst.frc.team4500.robot.commands.BallGrabber_Grab;
 import org.usfirst.frc.team4500.robot.commands.Cannon_Feed;
 import org.usfirst.frc.team4500.robot.commands.Cannon_MoveLeft;
 import org.usfirst.frc.team4500.robot.commands.Cannon_MoveRight;
+import org.usfirst.frc.team4500.robot.commands.Climber_Climb;
 import org.usfirst.frc.team4500.robot.commands.GearGrabber_Extend;
 import org.usfirst.frc.team4500.robot.commands.GearGrabber_Grab;
 import org.usfirst.frc.team4500.robot.commands.GearGrabber_Letgo;
@@ -27,6 +28,7 @@ public class OI {
 	Button grabBall;
 	Button grabGear, letGoGear;
 	Button extendPanel, retractPanel;
+	Button climb;
 	
 	
 	
@@ -66,6 +68,11 @@ public class OI {
 		extendPanel.whenPressed(new GearGrabber_Extend());
 		retractPanel = new JoystickButton(shootStick, 8);
 		retractPanel.whenPressed(new GearGrabber_Retract());
+		
+		// Buttons for the Climber
+		climb = new JoystickButton(shootStick, 0);
+		climb.whenPressed(new Climber_Climb(0.5));
+		climb.whenReleased(new Climber_Climb(0));
 	}
 	
 	/**

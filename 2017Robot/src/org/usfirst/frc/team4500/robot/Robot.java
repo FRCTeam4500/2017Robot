@@ -6,6 +6,7 @@ import java.io.IOException;
 import org.usfirst.frc.team4500.robot.commands.TestCommand;
 import org.usfirst.frc.team4500.robot.subsystems.BallGrabber;
 import org.usfirst.frc.team4500.robot.subsystems.Cannon;
+import org.usfirst.frc.team4500.robot.subsystems.Climber;
 import org.usfirst.frc.team4500.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4500.robot.subsystems.GearGrabber;
 
@@ -30,6 +31,7 @@ public class Robot extends IterativeRobot {
 	public static Cannon cannon;
 	public static BallGrabber ballgrabber;
 	public static GearGrabber geargrabber;
+	public static Climber climber;
 	
 	public static VisionClient visionServer;
 	public static OI oi;
@@ -47,6 +49,7 @@ public class Robot extends IterativeRobot {
 		cannon = new Cannon();
 		ballgrabber = new BallGrabber();
 		geargrabber = new GearGrabber();
+		climber = new Climber();
 		
 		/* Trys to enable the vision server and start a separate thread for it
 		 * If it encounters an error then it will through an IOException
