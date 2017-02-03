@@ -19,6 +19,8 @@ public class RobotMap {
 	
 	public static final int CLIMBMOTOR = 8;
 	
+	public static final int FUNNELMOTOR = 9;
+	
 	// Pneumatic ports
 	public static final int GRABBERSOL_1 = 1, GRABBERSOL_2 = 2;
 	

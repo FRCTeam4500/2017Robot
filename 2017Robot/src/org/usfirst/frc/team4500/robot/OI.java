@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4500.robot;
 
+import org.usfirst.frc.team4500.robot.commands.BallGrabber_Funnel;
 import org.usfirst.frc.team4500.robot.commands.BallGrabber_Grab;
 import org.usfirst.frc.team4500.robot.commands.Cannon_Feed;
 import org.usfirst.frc.team4500.robot.commands.Cannon_MoveLeft;
@@ -10,11 +11,11 @@ import org.usfirst.frc.team4500.robot.commands.GearGrabber_Grab;
 import org.usfirst.frc.team4500.robot.commands.GearGrabber_Letgo;
 import org.usfirst.frc.team4500.robot.commands.GearGrabber_Retract;
 import org.usfirst.frc.team4500.robot.commands.Group_Fire;
-import org.usfirst.frc.team4500.robot.subsystems.Functions;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import utilities.Functions;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -25,7 +26,7 @@ public class OI {
 	Joystick driveStick, shootStick;
 	
 	Button moveCannonLeft, moveCannonRight, feedBall, fireGroup;
-	Button grabBall;
+	Button grabBall, funnelBall;
 	Button grabGear, letGoGear;
 	Button extendPanel, retractPanel;
 	Button climb;
@@ -58,6 +59,10 @@ public class OI {
 		grabBall = new JoystickButton(shootStick, 2);
 		grabBall.whileHeld(new BallGrabber_Grab(-0.5));
 		grabBall.whenReleased(new BallGrabber_Grab(0));
+		funnelBall = new JoystickButton(shootStick, 12);
+		funnelBall.whileHeld(new BallGrabber_Funnel(0.5));
+		funnelBall.whenReleased(new BallGrabber_Funnel(0));
+		
 		
 		// Buttons for the GearGrabber
 		grabGear = new JoystickButton(shootStick, 5);
@@ -71,7 +76,7 @@ public class OI {
 		
 		// Buttons for the Climber
 		climb = new JoystickButton(shootStick, 0);
-		climb.whenPressed(new Climber_Climb(0.5));
+		climb.whileHeld(new Climber_Climb(0.5));
 		climb.whenReleased(new Climber_Climb(0));
 	}
 	

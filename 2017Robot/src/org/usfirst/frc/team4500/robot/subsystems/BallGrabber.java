@@ -13,10 +13,12 @@ public class BallGrabber extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	private static Talon grabberMotor;
+	private Talon grabberMotor;
+	private Talon funnelMotor;
 
 	public BallGrabber() {
 		grabberMotor = new Talon(RobotMap.BALLGRABMOTOR);
+		funnelMotor = new Talon(RobotMap.FUNNELMOTOR);
 	}
 	
     public void initDefaultCommand() {
@@ -29,6 +31,10 @@ public class BallGrabber extends Subsystem {
      */
     public void grabBall(double speed) {
     	grabberMotor.set(speed);
+    }
+    
+    public void funnelBall(double speed) {
+    	funnelMotor.set(speed);
     }
 }
 
