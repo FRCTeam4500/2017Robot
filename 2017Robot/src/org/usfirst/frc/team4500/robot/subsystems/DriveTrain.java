@@ -18,7 +18,7 @@ public class DriveTrain extends Subsystem {
 	private Talon lOmni, rOmni;
 	private Spark fsOmni, bsOmni;
 	
-	//private ADXRS450_Gyro gyro;
+	private ADXRS450_Gyro gyro;
 	
 	public DriveTrain() {
 		lOmni = new Talon(RobotMap.LMOTOR);
@@ -27,7 +27,7 @@ public class DriveTrain extends Subsystem {
     	fsOmni = new Spark(RobotMap.FSMOTOR);
     	bsOmni = new Spark(RobotMap.BSMOTOR);
     	
-    	//gyro = new ADXRS450_Gyro(); 	
+    	gyro = new ADXRS450_Gyro(); 	
 	}
 
     public void initDefaultCommand() {
@@ -35,9 +35,9 @@ public class DriveTrain extends Subsystem {
         setDefaultCommand(new OmniDrive());
     }
     
-//    public double getGyroAngle() {
-//		return gyro.getAngle();
-//	}
+    public double getGyroAngle() {
+		return gyro.getAngle();
+	}
     
     /**
      * Function for driving the robot. If there is no twist then move forward, backwards or strafe
