@@ -27,7 +27,10 @@ public class Group_Fire extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	requires(Robot.cannon);
+    	requires(Robot.ballgrabber);
     	addSequential(new Cannon_FireMax(speed));
     	addSequential(new Cannon_Feed(speed/2));
+    	addSequential(new BallGrabber_Funnel(speed/2));
+    	addSequential(new BallGrabber_Grab(speed/2));
     }
 }

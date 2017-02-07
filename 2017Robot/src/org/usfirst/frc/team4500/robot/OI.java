@@ -67,10 +67,13 @@ public class OI {
 		// Buttons for the GearGrabber
 		grabGear = new JoystickButton(shootStick, 5);
 		grabGear.whenPressed(new GearGrabber_Grab());
+		
 		letGoGear = new JoystickButton(shootStick, 6);
 		letGoGear.whenPressed(new GearGrabber_Letgo());
+		
 		extendPanel = new JoystickButton(shootStick, 7);
 		extendPanel.whenPressed(new GearGrabber_Extend());
+		
 		retractPanel = new JoystickButton(shootStick, 8);
 		retractPanel.whenPressed(new GearGrabber_Retract());
 		
