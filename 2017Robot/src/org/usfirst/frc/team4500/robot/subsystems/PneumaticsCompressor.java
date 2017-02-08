@@ -10,10 +10,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class PneumaticsCompressor extends Subsystem {
 
-	Compressor compress;
+	Compressor compress = new Compressor(RobotMap.COMPRESSOR);;
 	
 	public PneumaticsCompressor() {
-		compress = new Compressor(RobotMap.COMPRESSOR);
+		//compress = new Compressor(RobotMap.COMPRESSOR);
 		startCompressor();
 	}
 

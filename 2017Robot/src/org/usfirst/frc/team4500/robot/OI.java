@@ -59,22 +59,22 @@ public class OI {
 		grabBall = new JoystickButton(shootStick, 2);
 		grabBall.whileHeld(new BallGrabber_Grab(-0.5));
 		grabBall.whenReleased(new BallGrabber_Grab(0));
-		funnelBall = new JoystickButton(shootStick, 12);
+		funnelBall = new JoystickButton(shootStick, 8);
 		funnelBall.whileHeld(new BallGrabber_Funnel(0.5));
 		funnelBall.whenReleased(new BallGrabber_Funnel(0));
 		
 		
 		// Buttons for the GearGrabber
-		grabGear = new JoystickButton(shootStick, 5);
+		grabGear = new JoystickButton(shootStick, 6);
 		grabGear.whenPressed(new GearGrabber_Grab());
 		
-		letGoGear = new JoystickButton(shootStick, 6);
+		letGoGear = new JoystickButton(shootStick, 7);
 		letGoGear.whenPressed(new GearGrabber_Letgo());
 		
-		extendPanel = new JoystickButton(shootStick, 7);
+		extendPanel = new JoystickButton(shootStick, 11);
 		extendPanel.whenPressed(new GearGrabber_Extend());
 		
-		retractPanel = new JoystickButton(shootStick, 8);
+		retractPanel = new JoystickButton(shootStick, 10);
 		retractPanel.whenPressed(new GearGrabber_Retract());
 		
 		// Buttons for the Climber
