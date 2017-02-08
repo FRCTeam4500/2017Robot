@@ -21,7 +21,7 @@ public class DriveTrain extends Subsystem {
 	
 	private ADXRS450_Gyro gyro;
 	
-	private Encoder lEncoder, rEncoder;
+	public Encoder lEncoder, rEncoder;
 	
 	public DriveTrain() {
 		lOmni = new Talon(RobotMap.LMOTOR);

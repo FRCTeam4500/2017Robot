@@ -139,6 +139,10 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Gyro", Robot.drivetrain.getGyroAngle());
 		double data = visionServer.getData();
         SmartDashboard.putNumber("Server data", data);
+        SmartDashboard.putNumber("lEncoder.get", Robot.drivetrain.lEncoder.get());
+        SmartDashboard.putNumber("rEncoder.get", Robot.drivetrain.rEncoder.get());
+        SmartDashboard.putNumber("lEncoder.pidGet", Robot.drivetrain.lEncoder.pidGet());
+        SmartDashboard.putNumber("rEncoder.pidGet", Robot.drivetrain.rEncoder.pidGet());
 		
 		Scheduler.getInstance().run();
 	}
