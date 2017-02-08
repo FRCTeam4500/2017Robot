@@ -15,9 +15,9 @@ public class RobotMap {
 
 	public static final int HORIZMOTOR = 5, FIREMOTOR = 4, FEEDMOTOR = 6;
 	
-	public static final int BALLGRABMOTOR = 7;
+	public static final int BALLGRABMOTOR = 8;
 	
-	public static final int CLIMBMOTOR = 8;
+	public static final int CLIMBMOTOR = 7;
 	
 	public static final int FUNNELMOTOR = 9;
 	

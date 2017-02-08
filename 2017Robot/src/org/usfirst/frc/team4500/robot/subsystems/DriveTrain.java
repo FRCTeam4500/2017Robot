@@ -4,6 +4,7 @@ import org.usfirst.frc.team4500.robot.RobotMap;
 import org.usfirst.frc.team4500.robot.commands.OmniDrive;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
@@ -20,12 +21,19 @@ public class DriveTrain extends Subsystem {
 	
 	private ADXRS450_Gyro gyro;
 	
+	private Encoder lEncoder, rEncoder;
+	
 	public DriveTrain() {
 		lOmni = new Talon(RobotMap.LMOTOR);
     	rOmni = new Talon(RobotMap.RMOTOR);
     	
     	fsOmni = new Spark(RobotMap.FSMOTOR);
     	bsOmni = new Spark(RobotMap.BSMOTOR);
+    	
+    	lEncoder = new Encoder(9, 8);
+    	rEncoder = new Encoder(7, 6);
+    	lEncoder.setDistancePerPulse(0.115); // 1 pulse is .115 inches 2in/0.115
+    	rEncoder.setDistancePerPulse(0.115); 
     	
     	gyro = new ADXRS450_Gyro(); 	
 	}
@@ -34,7 +42,7 @@ public class DriveTrain extends Subsystem {
         // Set the default command for a subsystem here.
         setDefaultCommand(new OmniDrive());
     }
-    
+   
     public double getGyroAngle() {
 		return gyro.getAngle();
 	}
@@ -72,6 +80,14 @@ public class DriveTrain extends Subsystem {
     		rOmni.set(-joyY);
     	} 
     	 	
+    }
+    
+    public void resetLeftEncoder() {
+    	lEncoder.reset();
+    }
+    
+    public void resetRightEncoder() {
+    	rEncoder.reset();
     }
 }
 
