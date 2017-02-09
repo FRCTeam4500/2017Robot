@@ -30,10 +30,17 @@ public class DriveTrain extends Subsystem {
     	fsOmni = new Spark(RobotMap.FSMOTOR);
     	bsOmni = new Spark(RobotMap.BSMOTOR);
     	
-    	lEncoder = new Encoder(9, 8);
-    	rEncoder = new Encoder(7, 6);
+    	lEncoder = new Encoder(9, 8, false, Encoder.EncodingType.k2X);
+    	rEncoder = new Encoder(7, 6, false, Encoder.EncodingType.k2X);
     	lEncoder.setDistancePerPulse(0.115); // 1 pulse is .115 inches 2in/0.115
     	rEncoder.setDistancePerPulse(0.115); 
+    	lEncoder.setSamplesToAverage(7);
+    	rEncoder.setSamplesToAverage(7);
+    	
+    	/*horizEncoder.setMaxPeriod(.1);
+		horizEncoder.setDistancePerPulse(1);
+		horizEncoder.setMinRate(10);
+		horizEncoder.setSamplesToAverage(7);*/
     	
     	gyro = new ADXRS450_Gyro(); 	
 	}
