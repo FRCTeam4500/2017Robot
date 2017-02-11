@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import utilities.Functions;
 import utilities.VisionClient;
 
 /**
@@ -54,13 +55,13 @@ public class Robot extends IterativeRobot {
 		/* Trys to enable the vision server and start a separate thread for it
 		 * If it encounters an error then it will through an IOException
 		 */
-		try {
+		/*try {
 			visionServer = new VisionClient((short) 1234);
 			Thread t = new Thread(visionServer);
 			t.start();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}*/
 		
 		oi = new OI();
 		
@@ -125,6 +126,9 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
+		Robot.drivetrain.lEncoder.reset();
+		Robot.drivetrain.rEncoder.reset();
+		Robot.drivetrain.gyro.reset();
 	}
 
 	/**
@@ -137,12 +141,13 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("JoyY", Robot.oi.getJoyY());
 		SmartDashboard.putNumber("JoyTwist", Robot.oi.getJoyTwist());
 		SmartDashboard.putNumber("Gyro", Robot.drivetrain.getGyroAngle());
-		double data = visionServer.getData();
-        SmartDashboard.putNumber("Server data", data);
+		SmartDashboard.putNumber("UltasonicVal", Robot.drivetrain.ultrasonic.getValue());
+		/*double data = visionServer.getData();
+        SmartDashboard.putNumber("Server data", data);*/
         SmartDashboard.putNumber("lEncoder.get", Robot.drivetrain.lEncoder.get());
-        SmartDashboard.putNumber("rEncoder.get", Robot.drivetrain.rEncoder.get());
-        SmartDashboard.putNumber("lEncoder.pidGet", Robot.drivetrain.lEncoder.pidGet());
-        SmartDashboard.putNumber("rEncoder.pidGet", Robot.drivetrain.rEncoder.pidGet());
+        SmartDashboard.putNumber("lEncoder.getInches", Functions.encoderPulseToInches(Robot.drivetrain.lEncoder.get()));
+        SmartDashboard.putNumber("rEncoder.get", Robot.drivetrain.rEncoder.get()); 
+        SmartDashboard.putNumber("rEncoder.getInches", Functions.encoderPulseToInches(Robot.drivetrain.rEncoder.get())); 
 		
 		Scheduler.getInstance().run();
 	}

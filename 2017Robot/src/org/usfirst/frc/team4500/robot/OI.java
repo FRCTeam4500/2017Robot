@@ -78,8 +78,8 @@ public class OI {
 		retractPanel.whenPressed(new GearGrabber_Retract());
 		
 		// Buttons for the Climber
-		climb = new JoystickButton(shootStick, 0);
-		climb.whileHeld(new Climber_Climb(0.5));
+		climb = new JoystickButton(shootStick, 9);
+		climb.whileHeld(new Climber_Climb(1));
 		climb.whenReleased(new Climber_Climb(0));
 	}
 	
@@ -94,6 +94,7 @@ public class OI {
 		} else {
 			return (Math.abs(driveStick.getX()) < RobotMap.DEADZONE) ? 0 : xSquared*-xSquared;
 		}
+		
 		//return (Math.abs(driveStick.getX()) < RobotMap.DEADZONE) ? 0 : driveStick.getX();
 		//return (Math.abs(driveStick.getX()) < RobotMap.DEADZONE) ? 0 : Math.pow(driveStick.getX(), 2);
 	}

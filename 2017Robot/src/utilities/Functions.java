@@ -7,5 +7,9 @@ public class Functions {
 				(currentMax - currentMin)) 
 				+ newMin;
 	}
+	
+	public static double encoderPulseToInches(double pulse) {
+		return pulse*0.115;
+	}
 
 }

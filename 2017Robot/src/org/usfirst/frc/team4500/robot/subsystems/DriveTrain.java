@@ -4,10 +4,12 @@ import org.usfirst.frc.team4500.robot.RobotMap;
 import org.usfirst.frc.team4500.robot.commands.OmniDrive;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -19,9 +21,12 @@ public class DriveTrain extends Subsystem {
 	private Talon lOmni, rOmni;
 	private Spark fsOmni, bsOmni;
 	
-	private ADXRS450_Gyro gyro;
+	public ADXRS450_Gyro gyro;
 	
 	public Encoder lEncoder, rEncoder;
+	
+	//public Ultrasonic sonic;
+	public AnalogInput ultrasonic;
 	
 	public DriveTrain() {
 		lOmni = new Talon(RobotMap.LMOTOR);
@@ -30,12 +35,16 @@ public class DriveTrain extends Subsystem {
     	fsOmni = new Spark(RobotMap.FSMOTOR);
     	bsOmni = new Spark(RobotMap.BSMOTOR);
     	
-    	lEncoder = new Encoder(9, 8, false, Encoder.EncodingType.k2X);
-    	rEncoder = new Encoder(7, 6, false, Encoder.EncodingType.k2X);
+    	lEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
+    	rEncoder = new Encoder(2, 3, false, Encoder.EncodingType.k4X);
     	lEncoder.setDistancePerPulse(0.115); // 1 pulse is .115 inches 2in/0.115
     	rEncoder.setDistancePerPulse(0.115); 
     	lEncoder.setSamplesToAverage(7);
     	rEncoder.setSamplesToAverage(7);
+    	
+    	//sonic = new Ultrasonic(5, 5);
+    	//sonic.setAutomaticMode(true);
+    	ultrasonic = new AnalogInput(0); 
     	
     	/*horizEncoder.setMaxPeriod(.1);
 		horizEncoder.setDistancePerPulse(1);
@@ -61,21 +70,23 @@ public class DriveTrain extends Subsystem {
      * @param joyY
      * @param joyTwist
      */
-    public void omniDrive(double joyX, double joyY, double joyTwist) {
+    public void omniDrive(double x, double y, double z) {
+    	System.out.println("lOmni" + Double.toString(y+z*.5));
+    	System.out.println("rOmni" + Double.toString(-y-z*.5));
+    	System.out.println("fsOmni" + Double.toString(-x+z*.9));
+    	System.out.println("bsOmni" + Double.toString(x+z*.9));
+    	
+    	lOmni.set(y+z*.5);
+    	rOmni.set(-y-z*.5);
+    	fsOmni.set(-x+z*.9);
+    	bsOmni.set(x+z*.9);
+    	
+    	/*lOmni.set(y+z*.8);
+    	rOmni.set(-y-z*.8);
+    	fsOmni.set(-x+z*.8);
+    	bsOmni.set(x-z*.8);*/
+    	
     	/*if(joyTwist > 0.3 || joyTwist < -0.3) {
-    		fsOmni.set(-joyTwist);
-    		bsOmni.set(-joyTwist);
-    		lOmni.set(joyY);
-    		rOmni.set(-joyY);
-    	} else {
-    		fsOmni.set(-joyX);
-    		bsOmni.set(joyX);
-    		lOmni.set(joyY);
-    		rOmni.set(-joyY);
-    	}*/
-    	
-    	
-    	if(joyTwist > 0.3 || joyTwist < -0.3) {
     		fsOmni.set(-joyX);
     		bsOmni.set(joyX);
     		lOmni.set(-joyTwist);
@@ -85,8 +96,7 @@ public class DriveTrain extends Subsystem {
     		bsOmni.set(joyX);
     		lOmni.set(joyY);
     		rOmni.set(-joyY);
-    	} 
-    	 	
+    	}*/
     }
     
     public void resetLeftEncoder() {
