@@ -47,7 +47,7 @@ public class OI {
 		moveCannonRight.whenReleased(new Cannon_MoveRight(0));
 		
 		feedBall = new JoystickButton(shootStick, 3);
-		feedBall.whileHeld(new Cannon_Feed(0.5));
+		feedBall.whileHeld(new Cannon_Feed(1));
 		feedBall.whenReleased(new Cannon_Feed(0));
 		
 		fireGroup = new JoystickButton(shootStick, 1);
@@ -57,10 +57,10 @@ public class OI {
 		
 		// Buttons for the BallGrabber subsystem
 		grabBall = new JoystickButton(shootStick, 2);
-		grabBall.whileHeld(new BallGrabber_Grab(-0.5));
+		grabBall.whileHeld(new BallGrabber_Grab(-1));
 		grabBall.whenReleased(new BallGrabber_Grab(0));
 		funnelBall = new JoystickButton(shootStick, 8);
-		funnelBall.whileHeld(new BallGrabber_Funnel(0.5));
+		funnelBall.whileHeld(new BallGrabber_Funnel(0.8));
 		funnelBall.whenReleased(new BallGrabber_Funnel(0));
 		
 		
