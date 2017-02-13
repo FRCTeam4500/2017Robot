@@ -25,8 +25,8 @@ public class DriveTrain extends Subsystem {
 	
 	public Encoder lEncoder, rEncoder;
 	
-	//public Ultrasonic sonic;
-	public AnalogInput ultrasonic;
+	public Ultrasonic sonic;
+	//public AnalogInput ultrasonic;
 	
 	public DriveTrain() {
 		lOmni = new Talon(RobotMap.LMOTOR);
@@ -42,9 +42,9 @@ public class DriveTrain extends Subsystem {
     	lEncoder.setSamplesToAverage(7);
     	rEncoder.setSamplesToAverage(7);
     	
-    	//sonic = new Ultrasonic(5, 5);
-    	//sonic.setAutomaticMode(true);
-    	ultrasonic = new AnalogInput(0); 
+    	sonic = new Ultrasonic(8, 9);
+    	sonic.setAutomaticMode(true);
+    	//ultrasonic = new AnalogInput(0); 
     	
     	/*horizEncoder.setMaxPeriod(.1);
 		horizEncoder.setDistancePerPulse(1);
