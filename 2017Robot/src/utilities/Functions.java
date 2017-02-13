@@ -11,5 +11,13 @@ public class Functions {
 	public static double encoderPulseToInches(double pulse) {
 		return pulse*0.115;
 	}
+	
+	public static boolean ultrasonicInRange(double min, double max, double value) {
+		if(value >= min && value <= max) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 }
