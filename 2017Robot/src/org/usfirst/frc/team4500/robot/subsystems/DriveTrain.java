@@ -71,20 +71,21 @@ public class DriveTrain extends Subsystem {
      * @param joyTwist
      */
     public void omniDrive(double x, double y, double z) {
-    	System.out.println("lOmni" + Double.toString(y+z*.5));
-    	System.out.println("rOmni" + Double.toString(-y-z*.5));
-    	System.out.println("fsOmni" + Double.toString(-x+z*.9));
-    	System.out.println("bsOmni" + Double.toString(x+z*.9));
     	
-    	lOmni.set(y+z*.5);
-    	rOmni.set(-y-z*.5);
-    	fsOmni.set(-x+z*.9);
-    	bsOmni.set(x+z*.9);
+    	lOmni.set(y);
+    	rOmni.set(-y);
+    	fsOmni.set(-x+z);
+    	bsOmni.set(x+z);
     	
-    	/*lOmni.set(y+z*.8);
-    	rOmni.set(-y-z*.8);
-    	fsOmni.set(-x+z*.8);
-    	bsOmni.set(x-z*.8);*/
+    	/*if(x == 0 && y == 0 && (z > 0.8|| z < -0.8)) {
+    		lOmni.set(-z);
+    		rOmni.set(-z);
+    	} else {
+    		lOmni.set(y+z*.5);
+        	rOmni.set(-y-z*.5);
+        	fsOmni.set(-x+z*.9);
+        	bsOmni.set(x+z*.9);*/
+    	
     	
     	/*if(joyTwist > 0.3 || joyTwist < -0.3) {
     		fsOmni.set(-joyX);

@@ -60,7 +60,7 @@ public class OI {
 		grabBall.whileHeld(new BallGrabber_Grab(-1));
 		grabBall.whenReleased(new BallGrabber_Grab(0));
 		funnelBall = new JoystickButton(shootStick, 8);
-		funnelBall.whileHeld(new BallGrabber_Funnel(0.8));
+		funnelBall.whileHeld(new BallGrabber_Funnel(0.5));
 		funnelBall.whenReleased(new BallGrabber_Funnel(0));
 		
 		
@@ -75,7 +75,7 @@ public class OI {
 		extendPanel.whenPressed(new GearGrabber_Extend());
 		
 		retractPanel = new JoystickButton(shootStick, 10);
-		retractPanel.whenPressed(new GearGrabber_Retract());
+		retractPanel.whenPressed(new GearGrabber_Retract()); 
 		
 		// Buttons for the Climber
 		climb = new JoystickButton(shootStick, 9);
@@ -90,6 +90,8 @@ public class OI {
 	public double getJoyX() {
 		double xSquared = driveStick.getX();
 		if(xSquared > 0) {
+			// ? is the ternary opperator
+			// condition ? if true : if false
 			return (Math.abs(driveStick.getX()) < RobotMap.DEADZONE) ? 0 : Math.pow(driveStick.getX(), 2);
 		} else {
 			return (Math.abs(driveStick.getX()) < RobotMap.DEADZONE) ? 0 : xSquared*-xSquared;

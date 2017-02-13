@@ -29,10 +29,10 @@ public class Group_Fire extends CommandGroup {
     	requires(Robot.cannon);
     	requires(Robot.ballgrabber);
     	addParallel(new Cannon_FireMax(speed));
-    	addSequential(new Wait(1));
+    	addSequential(new Wait(0.5));
     	addSequential(new Cannon_Feed(speed/2));
-    	addSequential(new Wait(1));
-    	addSequential(new BallGrabber_Funnel(speed));
-    	addSequential(new BallGrabber_Grab(-speed/2));
+    	addSequential(new Wait(0.5));
+    	addSequential(new BallGrabber_Funnel(speed/2));
+    	//addSequential(new BallGrabber_Grab(-speed/2));
     }
 }
