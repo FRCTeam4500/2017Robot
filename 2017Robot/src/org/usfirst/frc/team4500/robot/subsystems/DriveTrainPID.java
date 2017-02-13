@@ -1,11 +1,12 @@
 package org.usfirst.frc.team4500.robot.subsystems;
 
 import org.usfirst.frc.team4500.robot.RobotMap;
+import org.usfirst.frc.team4500.robot.commands.OmniDrive;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
 /**
@@ -16,9 +17,9 @@ public class DriveTrainPID extends PIDSubsystem {
 	private Talon lOmni, rOmni;
 	private Spark fsOmni, bsOmni;
 	
-	private ADXRS450_Gyro gyro;
+	public ADXRS450_Gyro gyro;
 	
-	private Encoder lEncoder, rEncoder;
+	public Ultrasonic sonic;
 	
     public DriveTrainPID() {
     	// Name, P, I, D
@@ -29,28 +30,34 @@ public class DriveTrainPID extends PIDSubsystem {
     	fsOmni = new Spark(RobotMap.FSMOTOR);
     	bsOmni = new Spark(RobotMap.BSMOTOR);
     	
-    	lEncoder = new Encoder(9, 8);
-    	rEncoder = new Encoder(7, 6);
-    	lEncoder.setDistancePerPulse(0.115); // 1 pulse is .115 inches 2in/0.115
-    	rEncoder.setDistancePerPulse(0.115); 
-    	
     	gyro = new ADXRS450_Gyro(); 	
+    	
+    	sonic = new Ultrasonic(8, 9);
+    	sonic.setAutomaticMode(true);
         // Use these to get going:
-        setSetpoint(20); //-  Sets where the PID controller should move the system
+        //setSetpoint(5); //-  Sets where the PID controller should move the system
         //                  to
         enable(); //- Enables the PID controller.
     }
+    
+    public void pidMove(int goal) {
+    	setSetpoint(5);
+    }
+    
+    public double getGyroAngle() {
+		return gyro.getAngle();
+	}
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new OmniDrive());
     }
 
     protected double returnPIDInput() {
         // Return your input value for the PID loop
         // e.g. a sensor, like a potentiometer:
         // yourPot.getAverageVoltage() / kYourMaxVoltage;
-        return lEncoder.get(); // pidGet?
+        return sonic.getRangeInches();
     }
 
     protected void usePIDOutput(double output) {
@@ -59,4 +66,35 @@ public class DriveTrainPID extends PIDSubsystem {
     	lOmni.set(output);
     	rOmni.set(output);
     }
+    
+public void omniDrive(double x, double y, double z) {
+    	
+    	lOmni.set(y);
+    	rOmni.set(-y);
+    	fsOmni.set(-x+z);
+    	bsOmni.set(x+z);
+    	
+    	/*if(x == 0 && y == 0 && (z > 0.8|| z < -0.8)) {
+    		lOmni.set(-z);
+    		rOmni.set(-z);
+    	} else {
+    		lOmni.set(y+z*.5);
+        	rOmni.set(-y-z*.5);
+        	fsOmni.set(-x+z*.9);
+        	bsOmni.set(x+z*.9);*/
+    	
+    	
+    	/*if(joyTwist > 0.3 || joyTwist < -0.3) {
+    		fsOmni.set(-joyX);
+    		bsOmni.set(joyX);
+    		lOmni.set(-joyTwist);
+    		rOmni.set(-joyTwist);
+    	} else {
+    		fsOmni.set(-joyX);
+    		bsOmni.set(joyX);
+    		lOmni.set(joyY);
+    		rOmni.set(-joyY);
+    	}*/
+    }
+    
 }

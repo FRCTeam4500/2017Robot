@@ -11,6 +11,7 @@ import org.usfirst.frc.team4500.robot.commands.GearGrabber_Grab;
 import org.usfirst.frc.team4500.robot.commands.GearGrabber_Letgo;
 import org.usfirst.frc.team4500.robot.commands.GearGrabber_Retract;
 import org.usfirst.frc.team4500.robot.commands.Group_Fire;
+import org.usfirst.frc.team4500.robot.commands.PIDMove;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -30,7 +31,7 @@ public class OI {
 	Button grabGear, letGoGear;
 	Button extendPanel, retractPanel;
 	Button climb;
-	
+	Button pidMove;
 	
 	
 	public OI() {
@@ -81,6 +82,9 @@ public class OI {
 		climb = new JoystickButton(shootStick, 9);
 		climb.whileHeld(new Climber_Climb(1));
 		climb.whenReleased(new Climber_Climb(0));
+		
+		pidMove = new JoystickButton(driveStick, 5);
+		pidMove.whenPressed(new PIDMove());
 	}
 	
 	/**
