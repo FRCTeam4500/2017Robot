@@ -15,4 +15,4 @@ public class Functions {
 	public static boolean ultrasonicInRange(double min, double max, double value) {
 		return value >= min && value <= max ? true : false;
 	}
-}
+} 

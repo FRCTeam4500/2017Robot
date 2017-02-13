@@ -1,13 +1,12 @@
  
 package org.usfirst.frc.team4500.robot;
 
-import java.io.IOException;
-
 import org.usfirst.frc.team4500.robot.commands.TestCommand;
 import org.usfirst.frc.team4500.robot.subsystems.BallGrabber;
 import org.usfirst.frc.team4500.robot.subsystems.Cannon;
 import org.usfirst.frc.team4500.robot.subsystems.Climber;
 import org.usfirst.frc.team4500.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team4500.robot.subsystems.DriveTrainPID;
 import org.usfirst.frc.team4500.robot.subsystems.GearGrabber;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -28,7 +27,8 @@ import utilities.VisionClient;
  */
 public class Robot extends IterativeRobot {
 	
-	public static DriveTrain drivetrain;
+	//public static DriveTrain drivetrain;
+	public static DriveTrainPID drivetrain;
 	public static Cannon cannon;
 	public static BallGrabber ballgrabber;
 	public static GearGrabber geargrabber;
@@ -46,7 +46,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		drivetrain = new DriveTrain();
+		//drivetrain = new DriveTrain();
+		drivetrain = new DriveTrainPID();
 		cannon = new Cannon();
 		ballgrabber = new BallGrabber();
 		geargrabber = new GearGrabber();
@@ -126,8 +127,8 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
-		Robot.drivetrain.lEncoder.reset();
-		Robot.drivetrain.rEncoder.reset();
+		//Robot.drivetrain.lEncoder.reset();
+		//Robot.drivetrain.rEncoder.reset();
 		Robot.drivetrain.gyro.reset();
 	}
 
@@ -144,10 +145,10 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("UltasonicVal", Robot.drivetrain.sonic.getRangeInches());
 		/*double data = visionServer.getData();
         SmartDashboard.putNumber("Server data", data);*/
-        SmartDashboard.putNumber("lEncoder.get", Robot.drivetrain.lEncoder.get());
-        SmartDashboard.putNumber("lEncoder.getInches", Functions.encoderPulseToInches(Robot.drivetrain.lEncoder.get()));
-        SmartDashboard.putNumber("rEncoder.get", Robot.drivetrain.rEncoder.get()); 
-        SmartDashboard.putNumber("rEncoder.getInches", Functions.encoderPulseToInches(Robot.drivetrain.rEncoder.get())); 
+        //SmartDashboard.putNumber("lEncoder.get", Robot.drivetrain.lEncoder.get());
+        //SmartDashboard.putNumber("lEncoder.getInches", Functions.encoderPulseToInches(Robot.drivetrain.lEncoder.get()));
+        //SmartDashboard.putNumber("rEncoder.get", Robot.drivetrain.rEncoder.get()); 
+        //SmartDashboard.putNumber("rEncoder.getInches", Functions.encoderPulseToInches(Robot.drivetrain.rEncoder.get())); 
         double ultrasonic = Robot.drivetrain.sonic.getRangeInches();
         
         
