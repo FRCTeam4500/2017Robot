@@ -13,11 +13,6 @@ public class Functions {
 	}
 	
 	public static boolean ultrasonicInRange(double min, double max, double value) {
-		if(value >= min && value <= max) {
-			return true;
-		} else {
-			return false;
-		}
+		return value >= min && value <= max ? true : false;
 	}
-
 }
