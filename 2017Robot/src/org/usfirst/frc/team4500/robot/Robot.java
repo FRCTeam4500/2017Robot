@@ -141,7 +141,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("JoyY", Robot.oi.getJoyY());
 		SmartDashboard.putNumber("JoyTwist", Robot.oi.getJoyTwist());
 		SmartDashboard.putNumber("Gyro", Robot.drivetrain.getGyroAngle());
-		SmartDashboard.putNumber("UltasonicVal", Robot.drivetrain.ultrasonic.getValue());
+		SmartDashboard.putNumber("UltasonicVal", Robot.drivetrain.sonic.getRangeInches());
 		/*double data = visionServer.getData();
         SmartDashboard.putNumber("Server data", data);*/
         SmartDashboard.putNumber("lEncoder.get", Robot.drivetrain.lEncoder.get());
