@@ -40,8 +40,9 @@ public class DriveTrainPID extends PIDSubsystem {
         enable(); //- Enables the PID controller.
     }
     
-    public void pidMove(int goal) {
+    public void pidMove(double dLow, double dHigh) {
     	setSetpoint(5);
+    	disable();
     }
     
     public double getGyroAngle() {

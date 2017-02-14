@@ -84,7 +84,7 @@ public class OI {
 		climb.whenReleased(new Climber_Climb(0));
 		
 		pidMove = new JoystickButton(driveStick, 5);
-		pidMove.whenPressed(new PIDMove());
+		pidMove.whenPressed(new PIDMove(5, 15));
 	}
 	
 	/**
