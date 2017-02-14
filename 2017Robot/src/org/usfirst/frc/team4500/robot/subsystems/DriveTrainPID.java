@@ -35,6 +35,7 @@ public class DriveTrainPID extends PIDSubsystem {
     	
     	sonic = new Ultrasonic(8, 9);
     	sonic.setAutomaticMode(true);
+    	//getPIDController().
         // Use these to get going:
         //setSetpoint(5);
         //setInputRange(2, 8);//-  Sets where the PID controller should move the system
@@ -43,9 +44,18 @@ public class DriveTrainPID extends PIDSubsystem {
     }
     
     public void pidMove(double dLow, double dHigh) {
-    	setInputRange(dLow, dHigh);
+    	SmartDashboard.putNumber("onTarget", getPIDController().getError());
     	enable();
-    	//disable();
+    	setInputRange(dLow, dHigh);
+    }
+    
+    public boolean getError() {
+    	if(getPIDController().getError() < 2 && getPIDController().getError() > -2) {
+    		disable();
+    		return true;
+    	} else {
+    		return false;
+    	}
     }
     
     public double getGyroAngle() {
@@ -67,9 +77,18 @@ public class DriveTrainPID extends PIDSubsystem {
     protected void usePIDOutput(double output) {
         // Use output to drive your system, like a motor
         // e.g. yourMotor.set(output);
-    	SmartDashboard.putNumber("PID Output", output);
-    	lOmni.set(output/3);
-    	rOmni.set(-output/3);
+    	if(gyro.getAngle() > 1 || gyro.getAngle() < -1) {
+    		if(gyro.getAngle() > 0) {
+    			lOmni.set(0.3);
+    			rOmni.set(0.3);
+    		} else {
+    			lOmni.set(-0.3);
+    			rOmni.set(-0.3);
+    		}
+    	} else {
+    		lOmni.set(output/3);
+        	rOmni.set(-output/3);
+    	}
     }
     
     public void omniDrive(double x, double y, double z) {
