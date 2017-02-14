@@ -30,5 +30,6 @@ public class Auto_Test extends CommandGroup {
     	requires(Robot.geargrabber);
     	addSequential(new PIDMove(5, 15));
     	addSequential(new GearGrabber_Letgo());
+    	addSequential(new PIDMove(10, 20));
     }
 }
