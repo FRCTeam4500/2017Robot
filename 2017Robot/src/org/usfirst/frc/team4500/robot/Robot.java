@@ -152,6 +152,7 @@ public class Robot extends IterativeRobot {
         double ultrasonic = Robot.drivetrain.sonic.getRangeInches();
         SmartDashboard.putBoolean("ultrasonic 20-25", Functions.ultrasonicInRange(20, 25, ultrasonic));
         SmartDashboard.putBoolean("ultrasonic 10-19", Functions.ultrasonicInRange(10, 19, ultrasonic));
+        SmartDashboard.putBoolean("ultrasonic 0-3", Functions.ultrasonicInRange(0, 3, ultrasonic));
 		
 		Scheduler.getInstance().run();
 	}

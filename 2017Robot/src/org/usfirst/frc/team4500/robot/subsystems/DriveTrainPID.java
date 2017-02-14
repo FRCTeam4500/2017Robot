@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -23,7 +24,7 @@ public class DriveTrainPID extends PIDSubsystem {
 	
     public DriveTrainPID() {
     	// Name, P, I, D
-    	super("DriveTrainPID", 1.0, 0.0, 0.0);
+    	super("DriveTrainPID", 0.1, 0, 0);
     	lOmni = new Talon(RobotMap.LMOTOR);
     	rOmni = new Talon(RobotMap.RMOTOR);
     	
@@ -35,14 +36,16 @@ public class DriveTrainPID extends PIDSubsystem {
     	sonic = new Ultrasonic(8, 9);
     	sonic.setAutomaticMode(true);
         // Use these to get going:
-        //setSetpoint(5); //-  Sets where the PID controller should move the system
+        //setSetpoint(5);
+        //setInputRange(2, 8);//-  Sets where the PID controller should move the system
         //                  to
-        enable(); //- Enables the PID controller.
+        //enable(); //- Enables the PID controller.
     }
     
     public void pidMove(double dLow, double dHigh) {
-    	setSetpoint(5);
-    	disable();
+    	setInputRange(dLow, dHigh);
+    	enable();
+    	//disable();
     }
     
     public double getGyroAngle() {
@@ -64,11 +67,12 @@ public class DriveTrainPID extends PIDSubsystem {
     protected void usePIDOutput(double output) {
         // Use output to drive your system, like a motor
         // e.g. yourMotor.set(output);
-    	lOmni.set(output);
-    	rOmni.set(output);
+    	SmartDashboard.putNumber("PID Output", output);
+    	lOmni.set(output/3);
+    	rOmni.set(-output/3);
     }
     
-public void omniDrive(double x, double y, double z) {
+    public void omniDrive(double x, double y, double z) {
     	
     	lOmni.set(y);
     	rOmni.set(-y);
