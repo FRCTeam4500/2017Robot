@@ -49,8 +49,13 @@ public class DriveTrainPID extends PIDSubsystem {
     	setInputRange(dLow, dHigh);
     }
     
+    public void moveByDeg(double deg) {
+    	
+    }
+    
     public boolean getError() {
-    	if(getPIDController().getError() < 2 && getPIDController().getError() > -2) {
+    	SmartDashboard.putNumber("Error", getPIDController().getError());
+    	if(getPIDController().getError() < 6 && getPIDController().getError() > -6) { // 2, -2
     		disable();
     		return true;
     	} else {
@@ -61,6 +66,10 @@ public class DriveTrainPID extends PIDSubsystem {
     public double getGyroAngle() {
 		return gyro.getAngle();
 	}
+    
+    public void resetGyro() {
+    	gyro.reset();
+    }
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -79,11 +88,11 @@ public class DriveTrainPID extends PIDSubsystem {
         // e.g. yourMotor.set(output);
     	if(gyro.getAngle() > 1 || gyro.getAngle() < -1) {
     		if(gyro.getAngle() > 0) {
-    			lOmni.set(0.3);
-    			rOmni.set(0.3);
+    			lOmni.set(0.2);
+    			rOmni.set(0.2);
     		} else {
-    			lOmni.set(-0.3);
-    			rOmni.set(-0.3);
+    			lOmni.set(-0.2);
+    			rOmni.set(-0.2);
     		}
     	} else {
     		lOmni.set(output/3);
