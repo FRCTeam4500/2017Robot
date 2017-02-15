@@ -12,7 +12,9 @@ import org.usfirst.frc.team4500.robot.commands.GearGrabber_Grab;
 import org.usfirst.frc.team4500.robot.commands.GearGrabber_Letgo;
 import org.usfirst.frc.team4500.robot.commands.GearGrabber_Retract;
 import org.usfirst.frc.team4500.robot.commands.Group_Fire;
+import org.usfirst.frc.team4500.robot.commands.Group_MoveByAngle;
 import org.usfirst.frc.team4500.robot.commands.PIDMove;
+import org.usfirst.frc.team4500.robot.commands.RotateByDegrees;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -32,7 +34,7 @@ public class OI {
 	Button grabGear, letGoGear;
 	Button extendPanel, retractPanel;
 	Button climb;
-	Button pidMove, autoRun;
+	Button pidMove, autoRun, gyroMove;
 	
 	
 	public OI() {
@@ -89,6 +91,9 @@ public class OI {
 		
 		autoRun = new JoystickButton(driveStick, 6);
 		autoRun.whenPressed(new Auto_Test());
+		
+		gyroMove = new JoystickButton(driveStick, 3);
+		gyroMove.whenPressed(new Group_MoveByAngle(90));
 	}
 	
 	/**
