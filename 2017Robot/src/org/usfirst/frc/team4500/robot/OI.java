@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4500.robot;
 
+import org.usfirst.frc.team4500.robot.commands.Auto_Test;
 import org.usfirst.frc.team4500.robot.commands.BallGrabber_Funnel;
 import org.usfirst.frc.team4500.robot.commands.BallGrabber_Grab;
 import org.usfirst.frc.team4500.robot.commands.Cannon_Feed;
@@ -31,7 +32,7 @@ public class OI {
 	Button grabGear, letGoGear;
 	Button extendPanel, retractPanel;
 	Button climb;
-	Button pidMove;
+	Button pidMove, autoRun;
 	
 	
 	public OI() {
@@ -84,7 +85,10 @@ public class OI {
 		climb.whenReleased(new Climber_Climb(0));
 		
 		pidMove = new JoystickButton(driveStick, 5);
-		pidMove.whenPressed(new PIDMove());
+		pidMove.whenPressed(new PIDMove(5, 15));
+		
+		autoRun = new JoystickButton(driveStick, 6);
+		autoRun.whenPressed(new Auto_Test());
 	}
 	
 	/**

@@ -8,10 +8,15 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class PIDMove extends Command {
+	
+	double dLow = 0;
+	double dHigh = 0;
 
-    public PIDMove() {
+    public PIDMove(double dLow, double dHigh) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drivetrain);
+        this.dLow = dLow;
+        this.dHigh = dHigh;
     }
 
     // Called just before this Command runs the first time
@@ -20,12 +25,12 @@ public class PIDMove extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.pidMove();
+    	Robot.drivetrain.pidMove(dLow, dHigh);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Robot.drivetrain.getError();
     }
 
     // Called once after isFinished returns true
