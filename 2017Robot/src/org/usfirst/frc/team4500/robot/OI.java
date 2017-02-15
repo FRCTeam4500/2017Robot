@@ -61,7 +61,7 @@ public class OI {
 		grabBall.whileHeld(new BallGrabber_Grab(-1));
 		grabBall.whenReleased(new BallGrabber_Grab(0));
 		funnelBall = new JoystickButton(shootStick, 8);
-		funnelBall.whileHeld(new BallGrabber_Funnel(0.5));
+		funnelBall.whileHeld(new BallGrabber_Funnel(1));
 		funnelBall.whenReleased(new BallGrabber_Funnel(0));
 		
 		
