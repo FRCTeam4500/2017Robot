@@ -28,6 +28,6 @@ public class Group_MoveByAngle extends CommandGroup {
         // arm.
     	requires(Robot.drivetrain);
     	addSequential(new Reset_Gyro());
-    	addSequential(new RotateByDegrees(89, 91));
+    	addSequential(new RotateByDegrees(deg));
     }
 }

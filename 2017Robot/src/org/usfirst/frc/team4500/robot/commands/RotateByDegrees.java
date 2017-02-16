@@ -9,14 +9,16 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class RotateByDegrees extends Command {
 	
-	double dLow = 0;
-	double dHigh = 0;
+	//double dLow = 0;
+	//double dHigh = 0;
+	double deg = 0;
 
-    public RotateByDegrees(double dLow, double dHigh) {
+    public RotateByDegrees(double deg) {//double dLow, double dHigh) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drivetrain);
-        this.dLow = dLow;
-        this.dHigh = dHigh;
+        //this.dLow = dLow;
+        //this.dHigh = dHigh;
+        this.deg = deg;
     }
 
     // Called just before this Command runs the first time
@@ -34,7 +36,7 @@ public class RotateByDegrees extends Command {
     	}*/
     	Robot.drivetrain.useSonarInput = false;
     	//Robot.drivetrain.pidMove(dLow, dHigh);
-    	Robot.drivetrain.moveByDeg(dLow);
+    	Robot.drivetrain.moveByDeg(deg);
     	
     }
 

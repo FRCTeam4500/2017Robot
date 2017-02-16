@@ -31,7 +31,9 @@ public class Auto_Test extends CommandGroup {
     	//addSequential(new GearGrabber_Letgo());
     	addSequential(new Reset_Gyro());
     	addSequential(new PIDMove(1, 6));
+    	addSequential(new Wait(0.5));
     	addSequential(new GearGrabber_Grab());
+    	addSequential(new Wait(0.5));
     	addSequential(new PIDMove(35, 45));
     	addSequential(new GearGrabber_Letgo());
     }

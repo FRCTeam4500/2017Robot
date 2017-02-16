@@ -34,7 +34,7 @@ public class OI {
 	Button grabGear, letGoGear;
 	Button extendPanel, retractPanel;
 	Button climb;
-	Button pidMove, autoRun, gyroMove;
+	Button pidMove, autoRun, gyroMove, gyroMove2;
 	
 	
 	public OI() {
@@ -94,6 +94,9 @@ public class OI {
 		
 		gyroMove = new JoystickButton(driveStick, 3);
 		gyroMove.whenPressed(new Group_MoveByAngle(90));
+		
+		gyroMove2 = new JoystickButton(driveStick, 4);
+		gyroMove2.whenPressed(new Group_MoveByAngle(180));
 	}
 	
 	/**
