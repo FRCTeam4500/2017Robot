@@ -13,8 +13,8 @@ import org.usfirst.frc.team4500.robot.commands.GearGrabber_Letgo;
 import org.usfirst.frc.team4500.robot.commands.GearGrabber_Retract;
 import org.usfirst.frc.team4500.robot.commands.Group_Fire;
 import org.usfirst.frc.team4500.robot.commands.Group_MoveByAngle;
-import org.usfirst.frc.team4500.robot.commands.PIDMove;
-import org.usfirst.frc.team4500.robot.commands.RotateByDegrees;
+import org.usfirst.frc.team4500.robot.commands.DriveTrain_PIDMove;
+import org.usfirst.frc.team4500.robot.commands.DriveTrain_RotateByDegrees;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -87,7 +87,7 @@ public class OI {
 		climb.whenReleased(new Climber_Climb(0));
 		
 		pidMove = new JoystickButton(driveStick, 5);
-		pidMove.whenPressed(new PIDMove(5, 15));
+		pidMove.whenPressed(new DriveTrain_PIDMove(5, 15));
 		
 		autoRun = new JoystickButton(driveStick, 6);
 		autoRun.whenPressed(new Auto_Test());

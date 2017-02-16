@@ -27,7 +27,7 @@ public class Group_MoveByAngle extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	requires(Robot.drivetrain);
-    	addSequential(new Reset_Gyro());
-    	addSequential(new RotateByDegrees(deg));
+    	addSequential(new DriveTrain_ResetGyro());
+    	addSequential(new DriveTrain_RotateByDegrees(deg));
     }
 }

@@ -28,8 +28,17 @@ public class RobotMap {
 	
 	public static final int COMPRESSOR = 0;
 	
+	// Sensor ports
+	public static final int SONAR_OUTPUT = 8, SONAR_INPUT = 9; 
+	
 	// Others
 	public static final double DEADZONE = 0.4;
 	public static final double TWISTDEADZONE = 0.6;
+	
+	// This is the variable that the info from Jetson is being stored
+	public static double vData = 0.0;
+	
+	// The width and height of the image that is processed on the Jetson (resolution)
+	public static final double VISION_IMAGE_WIDTH = 1920.0, VISION_IMAGE_HEIGHT = 1080.0;
 	
 }

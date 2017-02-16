@@ -1,7 +1,7 @@
 package org.usfirst.frc.team4500.robot.subsystems;
 
 import org.usfirst.frc.team4500.robot.RobotMap;
-import org.usfirst.frc.team4500.robot.commands.OmniDrive;
+import org.usfirst.frc.team4500.robot.commands.DriveTrain_OmniDrive;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -26,7 +26,6 @@ public class DriveTrain extends Subsystem {
 	public Encoder lEncoder, rEncoder;
 	
 	public Ultrasonic sonic;
-	//public AnalogInput ultrasonic;
 	
 	public DriveTrain() {
 		lOmni = new Talon(RobotMap.LMOTOR);
@@ -35,16 +34,15 @@ public class DriveTrain extends Subsystem {
     	fsOmni = new Spark(RobotMap.FSMOTOR);
     	bsOmni = new Spark(RobotMap.BSMOTOR);
     	
-    	lEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
+    	/*lEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
     	rEncoder = new Encoder(2, 3, false, Encoder.EncodingType.k4X);
     	lEncoder.setDistancePerPulse(0.115); // 1 pulse is .115 inches 2in/0.115
     	rEncoder.setDistancePerPulse(0.115); 
     	lEncoder.setSamplesToAverage(7);
-    	rEncoder.setSamplesToAverage(7);
+    	rEncoder.setSamplesToAverage(7);*/
     	
-    	sonic = new Ultrasonic(8, 9);
-    	sonic.setAutomaticMode(true);
-    	//ultrasonic = new AnalogInput(0); 
+    	sonic = new Ultrasonic(RobotMap.SONAR_OUTPUT, RobotMap.SONAR_INPUT);
+    	sonic.setAutomaticMode(true); 
     	
     	/*horizEncoder.setMaxPeriod(.1);
 		horizEncoder.setDistancePerPulse(1);
@@ -56,7 +54,7 @@ public class DriveTrain extends Subsystem {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new OmniDrive());
+        setDefaultCommand(new DriveTrain_OmniDrive());
     }
    
     public double getGyroAngle() {
@@ -77,7 +75,7 @@ public class DriveTrain extends Subsystem {
     	fsOmni.set(-x+z);
     	bsOmni.set(x+z);
     	
-    	/*if(x == 0 && y == 0 && (z > 0.8|| z < -0.8)) {
+    	/*if(x == 0 && y == 0 && (z > 0.8 || z < -0.8)) {
     		lOmni.set(-z);
     		rOmni.set(-z);
     	} else {

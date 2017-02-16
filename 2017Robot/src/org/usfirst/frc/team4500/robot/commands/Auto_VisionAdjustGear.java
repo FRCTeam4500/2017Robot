@@ -1,22 +1,21 @@
 package org.usfirst.frc.team4500.robot.commands;
 
 import org.usfirst.frc.team4500.robot.Robot;
+import org.usfirst.frc.team4500.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class PIDMove extends Command {
+public class Auto_VisionAdjustGear extends Command {
 	
-	double dLow = 0;
-	double dHigh = 0;
+	double data = 0;
 
-    public PIDMove(double dLow, double dHigh) {
+    public Auto_VisionAdjustGear(double data) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drivetrain);
-        this.dLow = dLow;
-        this.dHigh = dHigh;
+        this.data = 0;
     }
 
     // Called just before this Command runs the first time
@@ -25,12 +24,19 @@ public class PIDMove extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.pidMove(dLow, dHigh);
+    	if(RobotMap.vData > RobotMap.VISION_IMAGE_WIDTH/2) {
+    		Robot.drivetrain.fsOmni.set(-0.2);
+    		Robot.drivetrain.bsOmni.set(0.2);
+    	} else {
+    		Robot.drivetrain.fsOmni.set(0.2);
+    		Robot.drivetrain.bsOmni.set(-0.2);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.drivetrain.getError();
+    	double distLeft = Math.abs((RobotMap.VISION_IMAGE_WIDTH/2) - RobotMap.vData);
+        return distLeft < 2 && distLeft > -2 ? true : false;
     }
 
     // Called once after isFinished returns true

@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class OmniDrive extends Command {
+public class DriveTrain_OmniDrive extends Command {
 
-    public OmniDrive() {
+    public DriveTrain_OmniDrive() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drivetrain);
     }

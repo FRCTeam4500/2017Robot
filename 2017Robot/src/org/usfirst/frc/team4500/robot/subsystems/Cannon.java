@@ -25,7 +25,7 @@ public class Cannon extends Subsystem {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new Cannon_Spinup());
+        //setDefaultCommand(new Cannon_Spinup());
     }
     
     /**

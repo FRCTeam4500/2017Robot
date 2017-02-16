@@ -1,7 +1,7 @@
  
 package org.usfirst.frc.team4500.robot;
 
-import org.usfirst.frc.team4500.robot.commands.TestCommand;
+import org.usfirst.frc.team4500.robot.commands.Auto_Test;
 import org.usfirst.frc.team4500.robot.subsystems.BallGrabber;
 import org.usfirst.frc.team4500.robot.subsystems.Cannon;
 import org.usfirst.frc.team4500.robot.subsystems.Climber;
@@ -66,7 +66,7 @@ public class Robot extends IterativeRobot {
 		
 		oi = new OI();
 		
-		autoChooser.addDefault("Default", new TestCommand(2));
+		autoChooser.addDefault("Default", new Auto_Test());
 	}
 
 	/**
@@ -143,17 +143,12 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("JoyTwist", Robot.oi.getJoyTwist());
 		SmartDashboard.putNumber("Gyro", Robot.drivetrain.getGyroAngle());
 		SmartDashboard.putNumber("UltasonicVal", Robot.drivetrain.sonic.getRangeInches());
-		/*double data = visionServer.getData();
-        SmartDashboard.putNumber("Server data", data);*/
+		RobotMap.vData = visionServer.getData();
+        SmartDashboard.putNumber("Server data", RobotMap.vData);
         //SmartDashboard.putNumber("lEncoder.get", Robot.drivetrain.lEncoder.get());
         //SmartDashboard.putNumber("lEncoder.getInches", Functions.encoderPulseToInches(Robot.drivetrain.lEncoder.get()));
         //SmartDashboard.putNumber("rEncoder.get", Robot.drivetrain.rEncoder.get()); 
         //SmartDashboard.putNumber("rEncoder.getInches", Functions.encoderPulseToInches(Robot.drivetrain.rEncoder.get())); 
-        double ultrasonic = Robot.drivetrain.sonic.getRangeInches();
-        SmartDashboard.putBoolean("ultrasonic 20-25", Functions.ultrasonicInRange(20, 25, ultrasonic));
-        SmartDashboard.putBoolean("ultrasonic 10-19", Functions.ultrasonicInRange(10, 19, ultrasonic));
-        SmartDashboard.putBoolean("ultrasonic 0-3", Functions.ultrasonicInRange(0, 3, ultrasonic));
-        SmartDashboard.putBoolean("Sonar or Gyro", Robot.drivetrain.useSonarInput);
 		
 		Scheduler.getInstance().run();
 	}
