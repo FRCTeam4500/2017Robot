@@ -77,17 +77,17 @@ public class OI {
 		//letGoGear = new JoystickButton(shootStick, 7);
 		//letGoGear.whenPressed(new GearGrabber_Letgo());
 		
-		grabberToggle = new JoystickButton(shootStick, 6);
+		grabberToggle = new JoystickButton(shootStick, 10);
 		grabberToggle.whenPressed(new GearGrabber_GrabberToggle());
 		
-		panelToggle = new JoystickButton(shootStick, 7);
+		panelToggle = new JoystickButton(shootStick, 11);
 		panelToggle.whenPressed(new GearGrabber_PanelToggle());
 		
-		extendPanel = new JoystickButton(shootStick, 11);
-		extendPanel.whenPressed(new GearGrabber_Extend());
+		//extendPanel = new JoystickButton(shootStick, 11);
+		//extendPanel.whenPressed(new GearGrabber_Extend());
 	
-		retractPanel = new JoystickButton(shootStick, 10);
-		retractPanel.whenPressed(new GearGrabber_Retract()); 
+		//retractPanel = new JoystickButton(shootStick, 10);
+		//retractPanel.whenPressed(new GearGrabber_Retract()); 
 		
 		// Buttons for the Climber
 		climb = new JoystickButton(shootStick, 9);
