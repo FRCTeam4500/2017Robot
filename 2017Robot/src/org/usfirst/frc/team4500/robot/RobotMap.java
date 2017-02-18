@@ -30,7 +30,7 @@ public class RobotMap {
 	
 	// Sensor ports
 	public static final int SONAR_OUTPUT = 8, SONAR_INPUT = 9; 
-	public static final int CANNON_ENCODER_1 = 0, CANNON_ENCODER_2 = 1;
+	public static final int CANNON_ENCODER_1 = 6, CANNON_ENCODER_2 = 7;
 	
 	// Others
 	public static final double DEADZONE = 0.4;

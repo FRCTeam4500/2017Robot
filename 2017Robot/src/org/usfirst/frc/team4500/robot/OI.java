@@ -31,7 +31,7 @@ public class OI {
 	Joystick driveStick, shootStick;
 	
 	Button moveCannonLeft, moveCannonRight, feedBall, fireGroup;
-	Button grabBall, funnelBall;
+	Button grabBall, funnelBallForward, funnelBallBackward;
 	Button grabGear, letGoGear;
 	Button extendPanel, retractPanel;
 	Button grabberToggle, panelToggle;
@@ -65,9 +65,15 @@ public class OI {
 		grabBall = new JoystickButton(shootStick, 2);
 		grabBall.whileHeld(new BallGrabber_Grab(-1));
 		grabBall.whenReleased(new BallGrabber_Grab(0));
-		funnelBall = new JoystickButton(shootStick, 8);
-		funnelBall.whileHeld(new BallGrabber_Funnel(0.5));
-		funnelBall.whenReleased(new BallGrabber_Funnel(0));
+		
+		
+		funnelBallForward = new JoystickButton(shootStick, 6);
+		funnelBallForward.whileHeld(new BallGrabber_Funnel(0.5));
+		funnelBallForward.whenReleased(new BallGrabber_Funnel(0));
+		
+		funnelBallBackward = new JoystickButton(shootStick, 7);
+		funnelBallBackward.whileHeld(new BallGrabber_Funnel(-0.5));
+		funnelBallBackward.whenReleased(new BallGrabber_Funnel(0));
 		
 		
 		// Buttons for the GearGrabber
@@ -94,7 +100,7 @@ public class OI {
 		climb.whileHeld(new Climber_Climb(1));
 		climb.whenReleased(new Climber_Climb(0));
 		
-		pidMove = new JoystickButton(driveStick, 5);
+		/*pidMove = new JoystickButton(driveStick, 5);
 		pidMove.whenPressed(new DriveTrain_PIDMove(5, 15));
 		
 		autoRun = new JoystickButton(driveStick, 6);
@@ -104,7 +110,7 @@ public class OI {
 		gyroMove.whenPressed(new Group_MoveByAngle(90));
 		
 		gyroMove2 = new JoystickButton(driveStick, 4);
-		gyroMove2.whenPressed(new Group_MoveByAngle(180));
+		gyroMove2.whenPressed(new Group_MoveByAngle(180));*/
 	}
 	
 	/**
