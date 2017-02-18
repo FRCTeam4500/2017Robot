@@ -5,7 +5,7 @@ import numpy as np
 import os
 
 data = 0
-path_to_streamer = "/media/mjpg-streamer/opencvImage"
+path_to_streamer = "/home/ubuntu/mjpg-streamer/cvOutput/"
 
 class Socket:
     def __init__(self, ip, port):
@@ -27,9 +27,9 @@ def server_thread(s_class):
 def opencv_thread():
     global data
     cap = cv2.VideoCapture(0)
-    cap.set(3, 320)
-    cap.set(4, 240)
-    cap.set(5, 30)
+    #cap.set(3, 320)
+    #cap.set(4, 240)
+    #cap.set(5, 30)
     while 1:
         _, frame = cap.read()
 
@@ -38,7 +38,7 @@ def opencv_thread():
 	    upper = np.array([255, 255, 255])
 	    mask = cv2.inRange(hsv, lower, upper)
 	    res = cv2.bitwise_and(frame, frame, mask=mask)
-	    cv2.imshow('mask', res)
+	    #cv2.imshow('mask', res)
 	
 	    ret, thresh = cv2.threshold(mask, 127, 255, 0)
 	    contours, hierarchy = cv2.findContours(thresh.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -85,7 +85,7 @@ def opencv_thread():
 	        center = [centerX, centerY]
 	        cv2.circle(frame, (center[0], center[1]), 1, (255, 0, 0), 5)
 	
-	        cv2.imwrite(path_to_streamer + "/output.jpg", frame)
+	        cv2.imwrite(path_to_streamer + "output.jpg", frame)
 	        k = cv2.waitKey(5) & 0xFF
 	        if k == 27:
 	            break
@@ -93,11 +93,13 @@ def opencv_thread():
 
 
 def main():
-    server = Socket("10.45.0.23", 1234)
-    socketThread = threading.Thread(target=server_thread, args=(server,))
+    #server = Socket("10.45.0.23", 1234)
+    #socketThread = threading.Thread(target=server_thread, args=(server,))
     opencvThread = threading.Thread(target=opencv_thread)
-    socketThread.start()
+    #socketThread.start()
     opencvThread.start()
+    os.system("cd /home/ubuntu/mjpg-streamer/ && mjpg_streamer -i 'input_file.so -f cvOutput/' -o 'output_http.so -w ./www -p 1235'")
+
 
 if __name__ == '__main__':
     main()
