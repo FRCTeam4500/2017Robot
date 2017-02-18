@@ -7,14 +7,15 @@ import org.usfirst.frc.team4500.robot.commands.Cannon_Feed;
 import org.usfirst.frc.team4500.robot.commands.Cannon_MoveLeft;
 import org.usfirst.frc.team4500.robot.commands.Cannon_MoveRight;
 import org.usfirst.frc.team4500.robot.commands.Climber_Climb;
+import org.usfirst.frc.team4500.robot.commands.DriveTrain_PIDMove;
 import org.usfirst.frc.team4500.robot.commands.GearGrabber_Extend;
 import org.usfirst.frc.team4500.robot.commands.GearGrabber_Grab;
+import org.usfirst.frc.team4500.robot.commands.GearGrabber_GrabberToggle;
 import org.usfirst.frc.team4500.robot.commands.GearGrabber_Letgo;
+import org.usfirst.frc.team4500.robot.commands.GearGrabber_PanelToggle;
 import org.usfirst.frc.team4500.robot.commands.GearGrabber_Retract;
 import org.usfirst.frc.team4500.robot.commands.Group_Fire;
 import org.usfirst.frc.team4500.robot.commands.Group_MoveByAngle;
-import org.usfirst.frc.team4500.robot.commands.DriveTrain_PIDMove;
-import org.usfirst.frc.team4500.robot.commands.DriveTrain_RotateByDegrees;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -33,6 +34,7 @@ public class OI {
 	Button grabBall, funnelBall;
 	Button grabGear, letGoGear;
 	Button extendPanel, retractPanel;
+	Button grabberToggle, panelToggle;
 	Button climb;
 	Button pidMove, autoRun, gyroMove, gyroMove2;
 	
@@ -69,15 +71,21 @@ public class OI {
 		
 		
 		// Buttons for the GearGrabber
-		grabGear = new JoystickButton(shootStick, 6);
-		grabGear.whenPressed(new GearGrabber_Grab());
+		//grabGear = new JoystickButton(shootStick, 6);
+		//grabGear.whenPressed(new GearGrabber_Grab());
 		
-		letGoGear = new JoystickButton(shootStick, 7);
-		letGoGear.whenPressed(new GearGrabber_Letgo());
+		//letGoGear = new JoystickButton(shootStick, 7);
+		//letGoGear.whenPressed(new GearGrabber_Letgo());
+		
+		grabberToggle = new JoystickButton(shootStick, 6);
+		grabberToggle.whenPressed(new GearGrabber_GrabberToggle());
+		
+		panelToggle = new JoystickButton(shootStick, 7);
+		panelToggle.whenPressed(new GearGrabber_PanelToggle());
 		
 		extendPanel = new JoystickButton(shootStick, 11);
 		extendPanel.whenPressed(new GearGrabber_Extend());
-		
+	
 		retractPanel = new JoystickButton(shootStick, 10);
 		retractPanel.whenPressed(new GearGrabber_Retract()); 
 		

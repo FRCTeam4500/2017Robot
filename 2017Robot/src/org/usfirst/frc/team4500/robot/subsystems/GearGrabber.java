@@ -19,6 +19,9 @@ public class GearGrabber extends Subsystem {
 	public GearGrabber() {
 		grabber = new DoubleSolenoid(RobotMap.GRABBERSOL_1, RobotMap.GRABBERSOL_2);
 		panel = new DoubleSolenoid(RobotMap.PANELSOL_1, RobotMap.PANELSOL_2);
+		
+		//grabber.set(Value.kForward);
+		//panel.set(Value.kForward);
 	}
 
     public void initDefaultCommand() {
@@ -43,8 +46,25 @@ public class GearGrabber extends Subsystem {
     public void panelExtend() {
     	panel.set(Value.kForward);
     }
+    
     public void panelRetract() {
     	panel.set(Value.kReverse);
+    }
+    
+    public void grabberToggle(boolean mode) {
+    	if(mode == true) {
+    		grabber.set(Value.kForward);
+    	} else {
+    		grabber.set(Value.kReverse);
+    	}
+    }
+    
+    public void panelToggle(boolean mode) {
+    	if(mode == true) {
+    		panel.set(Value.kForward);
+    	} else {
+    		panel.set(Value.kReverse);
+    	}
     }
 }
 
