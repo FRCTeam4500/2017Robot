@@ -20,7 +20,7 @@ public class DriveTrainPID extends PIDSubsystem {
 	
 	public Ultrasonic sonic;
 	
-	public boolean useSonarInput = true;
+	//public boolean useSonarInput = true;
 	
     public DriveTrainPID() {
     	// Name, P, I, D

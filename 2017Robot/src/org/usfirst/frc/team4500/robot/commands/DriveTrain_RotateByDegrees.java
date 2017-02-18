@@ -53,7 +53,7 @@ public class DriveTrain_RotateByDegrees extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.drivetrain.useSonarInput = true;
+    	//Robot.drivetrain.useSonarInput = true;
     }
 
     // Called when another command which requires one or more of the same

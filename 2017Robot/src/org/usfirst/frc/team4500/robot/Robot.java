@@ -1,6 +1,8 @@
  
 package org.usfirst.frc.team4500.robot;
 
+import java.io.IOException;
+
 import org.usfirst.frc.team4500.robot.commands.Auto_Test;
 import org.usfirst.frc.team4500.robot.subsystems.BallGrabber;
 import org.usfirst.frc.team4500.robot.subsystems.Cannon;
@@ -10,6 +12,7 @@ import org.usfirst.frc.team4500.robot.subsystems.DriveTrainPID;
 import org.usfirst.frc.team4500.robot.subsystems.GearGrabber;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -35,6 +38,7 @@ public class Robot extends IterativeRobot {
 	public static Climber climber;
 	
 	public static VisionClient visionServer;
+	public static SerialPort arduino;
 	public static OI oi;
 
 	Command autonomousCommand;
@@ -52,10 +56,12 @@ public class Robot extends IterativeRobot {
 		ballgrabber = new BallGrabber();
 		geargrabber = new GearGrabber();
 		climber = new Climber();
+		//arduino = new SerialPort(19200, SerialPort.Port.kUSB);
 		
 		/* Trys to enable the vision server and start a separate thread for it
 		 * If it encounters an error then it will through an IOException
 		 */
+		
 		/*try {
 			visionServer = new VisionClient((short) 1234);
 			Thread t = new Thread(visionServer);
@@ -144,7 +150,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Gyro", Robot.drivetrain.getGyroAngle());
 		SmartDashboard.putNumber("UltasonicVal", Robot.drivetrain.sonic.getRangeInches());
 		RobotMap.vData = visionServer.getData();
-        SmartDashboard.putNumber("Server data", RobotMap.vData);
+        SmartDashboard.putNumber("Server data", RobotMap.vData); 
         //SmartDashboard.putNumber("lEncoder.get", Robot.drivetrain.lEncoder.get());
         //SmartDashboard.putNumber("lEncoder.getInches", Functions.encoderPulseToInches(Robot.drivetrain.lEncoder.get()));
         //SmartDashboard.putNumber("rEncoder.get", Robot.drivetrain.rEncoder.get()); 
