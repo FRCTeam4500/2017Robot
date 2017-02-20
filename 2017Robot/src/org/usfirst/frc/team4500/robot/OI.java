@@ -1,20 +1,20 @@
 package org.usfirst.frc.team4500.robot;
 
 import org.usfirst.frc.team4500.robot.commands.Auto_Test;
+import org.usfirst.frc.team4500.robot.commands.Auto_VisionAdjustGear;
 import org.usfirst.frc.team4500.robot.commands.BallGrabber_Funnel;
 import org.usfirst.frc.team4500.robot.commands.BallGrabber_Grab;
 import org.usfirst.frc.team4500.robot.commands.Cannon_Feed;
 import org.usfirst.frc.team4500.robot.commands.Cannon_MoveLeft;
 import org.usfirst.frc.team4500.robot.commands.Cannon_MoveRight;
 import org.usfirst.frc.team4500.robot.commands.Climber_Climb;
+import org.usfirst.frc.team4500.robot.commands.DriveTrain_PIDMove;
 import org.usfirst.frc.team4500.robot.commands.GearGrabber_Extend;
 import org.usfirst.frc.team4500.robot.commands.GearGrabber_Grab;
 import org.usfirst.frc.team4500.robot.commands.GearGrabber_Letgo;
 import org.usfirst.frc.team4500.robot.commands.GearGrabber_Retract;
 import org.usfirst.frc.team4500.robot.commands.Group_Fire;
 import org.usfirst.frc.team4500.robot.commands.Group_MoveByAngle;
-import org.usfirst.frc.team4500.robot.commands.DriveTrain_PIDMove;
-import org.usfirst.frc.team4500.robot.commands.DriveTrain_RotateByDegrees;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -35,6 +35,8 @@ public class OI {
 	Button extendPanel, retractPanel;
 	Button climb;
 	Button pidMove, autoRun, gyroMove, gyroMove2;
+	
+	Button visionAlign, visionAlign2;
 	
 	
 	public OI() {
@@ -97,6 +99,12 @@ public class OI {
 		
 		gyroMove2 = new JoystickButton(driveStick, 4);
 		gyroMove2.whenPressed(new Group_MoveByAngle(180));
+		
+		visionAlign = new JoystickButton(driveStick, 9);
+		visionAlign.whenPressed(new Auto_VisionAdjustGear(Robot.visionServer.getData()));
+		
+		//visionAlign2 = new JoystickButton(driveStick, 10);
+		//visionAlign2.whenPressed(new Auto_VisionAdjustGearPID(0, 10));
 	}
 	
 	/**

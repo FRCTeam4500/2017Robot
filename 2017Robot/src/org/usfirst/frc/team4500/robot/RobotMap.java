@@ -39,6 +39,6 @@ public class RobotMap {
 	public static double vData = 0.0;
 	
 	// The width and height of the image that is processed on the Jetson (resolution)
-	public static final double VISION_IMAGE_WIDTH = 1920.0, VISION_IMAGE_HEIGHT = 1080.0;
+	public static final double VISION_IMAGE_WIDTH = 640.0, VISION_IMAGE_HEIGHT = 480.0;
 	
 }

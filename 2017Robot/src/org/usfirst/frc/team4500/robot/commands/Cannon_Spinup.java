@@ -24,7 +24,7 @@ public class Cannon_Spinup extends Command {
     	if(Robot.oi.getJoyScroll() == 0.5) {
     		Robot.cannon.fireSpinup(0);
     	} else {
-    		Robot.cannon.fireSpinup(Robot.oi.getJoyScroll());
+    		Robot.cannon.fireSpinup(-Robot.oi.getJoyScroll());
     	}
     }
 

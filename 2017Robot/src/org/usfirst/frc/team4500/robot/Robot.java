@@ -52,6 +52,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		//drivetrain = new DriveTrain();
 		drivetrain = new DriveTrainPID();
+		//autodrivetrain = new AutoDriveTrainPID();
 		cannon = new Cannon();
 		ballgrabber = new BallGrabber();
 		geargrabber = new GearGrabber();
@@ -62,13 +63,13 @@ public class Robot extends IterativeRobot {
 		 * If it encounters an error then it will through an IOException
 		 */
 		
-		/*try {
-			visionServer = new VisionClient((short) 1234);
+		try {
+			visionServer = new VisionClient((short) 3141);
 			Thread t = new Thread(visionServer);
 			t.start();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}*/
+		}
 		
 		oi = new OI();
 		
@@ -135,7 +136,7 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 		//Robot.drivetrain.lEncoder.reset();
 		//Robot.drivetrain.rEncoder.reset();
-		Robot.drivetrain.gyro.reset();
+		//Robot.drivetrain.gyro.reset();
 	}
 
 	/**
@@ -149,8 +150,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("JoyTwist", Robot.oi.getJoyTwist());
 		SmartDashboard.putNumber("Gyro", Robot.drivetrain.getGyroAngle());
 		SmartDashboard.putNumber("UltasonicVal", Robot.drivetrain.sonic.getRangeInches());
-		RobotMap.vData = visionServer.getData();
-        SmartDashboard.putNumber("Server data", RobotMap.vData); 
+		//RobotMap.vData = visionServer.getData();
+        SmartDashboard.putNumber("Server data", visionServer.getData()); 
         //SmartDashboard.putNumber("lEncoder.get", Robot.drivetrain.lEncoder.get());
         //SmartDashboard.putNumber("lEncoder.getInches", Functions.encoderPulseToInches(Robot.drivetrain.lEncoder.get()));
         //SmartDashboard.putNumber("rEncoder.get", Robot.drivetrain.rEncoder.get()); 

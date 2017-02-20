@@ -14,8 +14,7 @@ public class VisionClient implements Runnable {
 	public VisionClient(short port) throws IOException {
 		socket = new DatagramSocket(port);
 		mutex = new Semaphore(1);
-		data = 0;
-	}
+		data = 0;	}
 	
 	/**
 	 * Grabs the data from the coprocessor using UDP protocol.
