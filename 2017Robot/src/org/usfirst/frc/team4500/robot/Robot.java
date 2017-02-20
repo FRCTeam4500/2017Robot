@@ -137,6 +137,8 @@ public class Robot extends IterativeRobot {
 		//Robot.drivetrain.lEncoder.reset();
 		//Robot.drivetrain.rEncoder.reset();
 		//Robot.drivetrain.gyro.reset();
+		Robot.drivetrain.gyro.reset();
+		Robot.cannon.resetEncoder();
 	}
 
 	/**
@@ -152,11 +154,12 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("UltasonicVal", Robot.drivetrain.sonic.getRangeInches());
 		//RobotMap.vData = visionServer.getData();
         SmartDashboard.putNumber("Server data", visionServer.getData()); 
+        //SmartDashboard.putNumber("Server data", RobotMap.vData);
         //SmartDashboard.putNumber("lEncoder.get", Robot.drivetrain.lEncoder.get());
         //SmartDashboard.putNumber("lEncoder.getInches", Functions.encoderPulseToInches(Robot.drivetrain.lEncoder.get()));
         //SmartDashboard.putNumber("rEncoder.get", Robot.drivetrain.rEncoder.get()); 
         //SmartDashboard.putNumber("rEncoder.getInches", Functions.encoderPulseToInches(Robot.drivetrain.rEncoder.get())); 
-		
+		SmartDashboard.putNumber("cannonEncoder", Robot.cannon.cannonEncoder.get());
 		Scheduler.getInstance().run();
 	}
 

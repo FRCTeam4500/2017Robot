@@ -11,7 +11,9 @@ import org.usfirst.frc.team4500.robot.commands.Climber_Climb;
 import org.usfirst.frc.team4500.robot.commands.DriveTrain_PIDMove;
 import org.usfirst.frc.team4500.robot.commands.GearGrabber_Extend;
 import org.usfirst.frc.team4500.robot.commands.GearGrabber_Grab;
+import org.usfirst.frc.team4500.robot.commands.GearGrabber_GrabberToggle;
 import org.usfirst.frc.team4500.robot.commands.GearGrabber_Letgo;
+import org.usfirst.frc.team4500.robot.commands.GearGrabber_PanelToggle;
 import org.usfirst.frc.team4500.robot.commands.GearGrabber_Retract;
 import org.usfirst.frc.team4500.robot.commands.Group_Fire;
 import org.usfirst.frc.team4500.robot.commands.Group_MoveByAngle;
@@ -30,9 +32,10 @@ public class OI {
 	Joystick driveStick, shootStick;
 	
 	Button moveCannonLeft, moveCannonRight, feedBall, fireGroup;
-	Button grabBall, funnelBall;
+	Button grabBall, funnelBallForward, funnelBallBackward;
 	Button grabGear, letGoGear;
 	Button extendPanel, retractPanel;
+	Button grabberToggle, panelToggle;
 	Button climb;
 	Button pidMove, autoRun, gyroMove, gyroMove2;
 	
@@ -65,23 +68,35 @@ public class OI {
 		grabBall = new JoystickButton(shootStick, 2);
 		grabBall.whileHeld(new BallGrabber_Grab(-1));
 		grabBall.whenReleased(new BallGrabber_Grab(0));
-		funnelBall = new JoystickButton(shootStick, 8);
-		funnelBall.whileHeld(new BallGrabber_Funnel(0.5));
-		funnelBall.whenReleased(new BallGrabber_Funnel(0));
+		
+		
+		funnelBallForward = new JoystickButton(shootStick, 6);
+		funnelBallForward.whileHeld(new BallGrabber_Funnel(0.5));
+		funnelBallForward.whenReleased(new BallGrabber_Funnel(0));
+		
+		funnelBallBackward = new JoystickButton(shootStick, 7);
+		funnelBallBackward.whileHeld(new BallGrabber_Funnel(-0.5));
+		funnelBallBackward.whenReleased(new BallGrabber_Funnel(0));
 		
 		
 		// Buttons for the GearGrabber
-		grabGear = new JoystickButton(shootStick, 6);
-		grabGear.whenPressed(new GearGrabber_Grab());
+		//grabGear = new JoystickButton(shootStick, 6);
+		//grabGear.whenPressed(new GearGrabber_Grab());
 		
-		letGoGear = new JoystickButton(shootStick, 7);
-		letGoGear.whenPressed(new GearGrabber_Letgo());
+		//letGoGear = new JoystickButton(shootStick, 7);
+		//letGoGear.whenPressed(new GearGrabber_Letgo());
 		
-		extendPanel = new JoystickButton(shootStick, 11);
-		extendPanel.whenPressed(new GearGrabber_Extend());
+		grabberToggle = new JoystickButton(shootStick, 10);
+		grabberToggle.whenPressed(new GearGrabber_GrabberToggle());
 		
-		retractPanel = new JoystickButton(shootStick, 10);
-		retractPanel.whenPressed(new GearGrabber_Retract()); 
+		panelToggle = new JoystickButton(shootStick, 11);
+		panelToggle.whenPressed(new GearGrabber_PanelToggle());
+		
+		//extendPanel = new JoystickButton(shootStick, 11);
+		//extendPanel.whenPressed(new GearGrabber_Extend());
+	
+		//retractPanel = new JoystickButton(shootStick, 10);
+		//retractPanel.whenPressed(new GearGrabber_Retract()); 
 		
 		// Buttons for the Climber
 		climb = new JoystickButton(shootStick, 9);
@@ -105,6 +120,7 @@ public class OI {
 		
 		//visionAlign2 = new JoystickButton(driveStick, 10);
 		//visionAlign2.whenPressed(new Auto_VisionAdjustGearPID(0, 10));
+		gyroMove2.whenPressed(new Group_MoveByAngle(180));
 	}
 	
 	/**

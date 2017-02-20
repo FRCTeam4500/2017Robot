@@ -3,6 +3,7 @@ package org.usfirst.frc.team4500.robot.subsystems;
 import org.usfirst.frc.team4500.robot.RobotMap;
 import org.usfirst.frc.team4500.robot.commands.Cannon_Spinup;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -17,15 +18,23 @@ public class Cannon extends Subsystem {
 	private Talon fireMotor;
 	private Talon feedMotor;
 	
+	public Encoder cannonEncoder;
+	
 	public Cannon() {
 		horizMotor = new Talon(RobotMap.HORIZMOTOR);
 		fireMotor = new Talon(RobotMap.FIREMOTOR);
 		feedMotor = new Talon(RobotMap.FEEDMOTOR);
+		
+		cannonEncoder = new Encoder(RobotMap.CANNON_ENCODER_1, RobotMap.CANNON_ENCODER_2);
 	}
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         setDefaultCommand(new Cannon_Spinup());
+    }
+    
+    public void resetEncoder() {
+    	cannonEncoder.reset();
     }
     
     /**
