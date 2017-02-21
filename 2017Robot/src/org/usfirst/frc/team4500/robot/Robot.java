@@ -138,7 +138,7 @@ public class Robot extends IterativeRobot {
 		//Robot.drivetrain.rEncoder.reset();
 		//Robot.drivetrain.gyro.reset();
 		Robot.drivetrain.gyro.reset();
-		Robot.cannon.resetEncoder();
+		//Robot.cannon.resetEncoder();
 	}
 
 	/**

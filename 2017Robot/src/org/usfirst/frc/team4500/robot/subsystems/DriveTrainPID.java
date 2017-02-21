@@ -77,22 +77,42 @@ public class DriveTrainPID extends PIDSubsystem {
         // yourPot.getAverageVoltage() / kYourMaxVoltage;
         return sonic.getRangeInches();
     }
+    
+    public void gyroCorrect() {
+    	if(gyro.getAngle() > 0.20 || gyro.getAngle() < -0.20) { // 0.25
+    		if(gyro.getAngle() > 0) {
+    			//lOmni.set(0.1); // 0.1
+    			//rOmni.set(0.1);
+    			bsOmni.set(-0.325);
+    		} else {
+    			//lOmni.set(-0.1);
+    			//rOmni.set(-0.1);
+    			bsOmni.set(0.325);
+    		}
+    	}
+    }
 
     protected void usePIDOutput(double output) {
         // Use output to drive your system, like a motor
         // e.g. yourMotor.set(output);
-    	if(gyro.getAngle() > 1 || gyro.getAngle() < -1) {
+    	
+    	gyroCorrect();
+    	lOmni.set(output/3); // o/3
+    	rOmni.set(-output/3);
+    	/*if(gyro.getAngle() > 0.5 || gyro.getAngle() < -0.5) { // 0.25
     		if(gyro.getAngle() > 0) {
-    			lOmni.set(0.2);
-    			rOmni.set(0.2);
+    			//lOmni.set(0.1); // 0.1
+    			//rOmni.set(0.1);
+    			bsOmni.set(-0.3);
     		} else {
-    			lOmni.set(-0.2);
-    			rOmni.set(-0.2);
+    			//lOmni.set(-0.1);
+    			//rOmni.set(-0.1);
+    			bsOmni.set(0.3);
     		}
     	} else {
-    		lOmni.set(output/3);
+    		lOmni.set(output/3); // o/3
         	rOmni.set(-output/3);
-    	}
+    	}*/
     }
     
     public void omniDrive(double x, double y, double z) {
