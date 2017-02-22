@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class Group_Fire extends CommandGroup {
 
-    public Group_Fire(double speed) {
+    public Group_Fire(double speed, boolean fromTrigger) {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -32,7 +32,7 @@ public class Group_Fire extends CommandGroup {
     	//addSequential(new Wait(0.5));
     	addSequential(new Cannon_Feed(speed/2));
     	addSequential(new Wait(0.5));
-    	addSequential(new BallGrabber_Funnel(speed/2));
+    	addSequential(new BallGrabber_Funnel(speed));
     	//addSequential(new BallGrabber_Grab(-speed/2));
     }
 }

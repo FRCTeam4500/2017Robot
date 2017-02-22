@@ -83,11 +83,13 @@ public class DriveTrainPID extends PIDSubsystem {
     		if(gyro.getAngle() > 0) {
     			//lOmni.set(0.1); // 0.1
     			//rOmni.set(0.1);
-    			bsOmni.set(-0.325);
+    			bsOmni.set(-0.325); //bs is fs
+    			fsOmni.set(-0.250); // 292
     		} else {
     			//lOmni.set(-0.1);
     			//rOmni.set(-0.1);
     			bsOmni.set(0.325);
+    			fsOmni.set(0.250);
     		}
     	}
     }
@@ -95,23 +97,37 @@ public class DriveTrainPID extends PIDSubsystem {
     protected void usePIDOutput(double output) {
         // Use output to drive your system, like a motor
         // e.g. yourMotor.set(output);
-    	
+    	SmartDashboard.putNumber("PIDOutput", output);
     	gyroCorrect();
-    	lOmni.set(output/3); // o/3
-    	rOmni.set(-output/3);
-    	/*if(gyro.getAngle() > 0.5 || gyro.getAngle() < -0.5) { // 0.25
+    	lOmni.set(output/2.5); // o/3
+    	rOmni.set(-output/2.5);
+    	
+    	/*if(gyro.getAngle() > 0.25 || gyro.getAngle() < -0.25) { // 0.25
     		if(gyro.getAngle() > 0) {
-    			//lOmni.set(0.1); // 0.1
-    			//rOmni.set(0.1);
-    			bsOmni.set(-0.3);
+    			lOmni.set(0.1); // 0.1
+    			rOmni.set(0.1);
+    			//bsOmni.set(-0.3);
     		} else {
-    			//lOmni.set(-0.1);
-    			//rOmni.set(-0.1);
-    			bsOmni.set(0.3);
+    			lOmni.set(-0.1);
+    			rOmni.set(-0.1);
+    			//bsOmni.set(0.3);
     		}
     	} else {
     		lOmni.set(output/3); // o/3
         	rOmni.set(-output/3);
+    	}*/
+    	// L + gyro*gain
+    	// L - gyro*gain
+    	
+    	
+    	// Set the motors to the same polarity
+    	
+    	/*if(gyro.getAngle() > 0) {
+    		lOmni.set((output/3) + gyro.getAngle()*1.5);
+        	rOmni.set((output/3) - (gyro.getAngle()*1.5));
+    	} else {
+    		lOmni.set((output/3) - gyro.getAngle()*1.5);
+        	rOmni.set((output/3) + (gyro.getAngle()*1.5));
     	}*/
     }
     

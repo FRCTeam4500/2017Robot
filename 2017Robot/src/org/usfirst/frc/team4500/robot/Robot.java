@@ -159,7 +159,7 @@ public class Robot extends IterativeRobot {
         //SmartDashboard.putNumber("lEncoder.getInches", Functions.encoderPulseToInches(Robot.drivetrain.lEncoder.get()));
         //SmartDashboard.putNumber("rEncoder.get", Robot.drivetrain.rEncoder.get()); 
         //SmartDashboard.putNumber("rEncoder.getInches", Functions.encoderPulseToInches(Robot.drivetrain.rEncoder.get())); 
-		SmartDashboard.putNumber("cannonEncoder", Robot.cannon.cannonEncoder.get());
+		//SmartDashboard.putNumber("cannonEncoder", Robot.cannon.cannonEncoder.get());
 		Scheduler.getInstance().run();
 	}
 

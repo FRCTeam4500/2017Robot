@@ -32,12 +32,14 @@ public class Auto_Test extends CommandGroup {
     
     	//addSequential(new Auto_VisionAdjustGear(RobotMap.vData));
     	addSequential(new DriveTrain_ResetGyro());
-    	addSequential(new DriveTrain_PIDMove(0.1, 1));
+    	addSequential(new DriveTrain_PIDMove(3, 4));
     	addSequential(new Wait(0.8));
     	addSequential(new GearGrabber_Letgo());
     	addSequential(new Wait(0.8));
-    	addSequential(new DriveTrain_PIDMove(35, 45));
+    	addSequential(new DriveTrain_PIDMove(40, 42));
     	addSequential(new GearGrabber_Grab());
+    	addSequential(new Wait(0.5));
+    	addSequential(new Group_Fire(1));
     	
     	//addSequential(new DriveTrain_RotateByDegrees(180));
     }
