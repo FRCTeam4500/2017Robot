@@ -10,10 +10,12 @@ import edu.wpi.first.wpilibj.command.Command;
 public class BallGrabber_Funnel extends Command {
 	
 	double speed = 0;
+	boolean fromTrigger;
 
-    public BallGrabber_Funnel(double speed) {
+    public BallGrabber_Funnel(double speed, boolean fromTrigger) {
         // Use requires() here to declare subsystem dependencies
         this.speed = speed;
+        this.fromTrigger = fromTrigger;
     	requires(Robot.ballgrabber);
     }
 
@@ -28,7 +30,7 @@ public class BallGrabber_Funnel extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return fromTrigger;
     }
 
     // Called once after isFinished returns true

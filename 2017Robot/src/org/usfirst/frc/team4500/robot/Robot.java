@@ -7,9 +7,9 @@ import org.usfirst.frc.team4500.robot.commands.Auto_Test;
 import org.usfirst.frc.team4500.robot.subsystems.BallGrabber;
 import org.usfirst.frc.team4500.robot.subsystems.Cannon;
 import org.usfirst.frc.team4500.robot.subsystems.Climber;
-import org.usfirst.frc.team4500.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4500.robot.subsystems.DriveTrainPID;
 import org.usfirst.frc.team4500.robot.subsystems.GearGrabber;
+import org.usfirst.frc.team4500.robot.subsystems.PneumaticsCompressor;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -18,7 +18,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import utilities.Functions;
 import utilities.VisionClient;
 
 /**
@@ -31,6 +30,9 @@ import utilities.VisionClient;
 public class Robot extends IterativeRobot {
 	
 	//public static DriveTrain drivetrain;
+	
+	public static PneumaticsCompressor compressor;
+	
 	public static DriveTrainPID drivetrain;
 	public static Cannon cannon;
 	public static BallGrabber ballgrabber;
@@ -57,6 +59,7 @@ public class Robot extends IterativeRobot {
 		ballgrabber = new BallGrabber();
 		geargrabber = new GearGrabber();
 		climber = new Climber();
+		compressor = new PneumaticsCompressor();
 		//arduino = new SerialPort(19200, SerialPort.Port.kUSB);
 		
 		/* Trys to enable the vision server and start a separate thread for it

@@ -39,7 +39,7 @@ public class Auto_Test extends CommandGroup {
     	addSequential(new DriveTrain_PIDMove(40, 42));
     	addSequential(new GearGrabber_Grab());
     	addSequential(new Wait(0.5));
-    	addSequential(new Group_Fire(1));
+    	addSequential(new Group_Fire(1, false));
     	
     	//addSequential(new DriveTrain_RotateByDegrees(180));
     }

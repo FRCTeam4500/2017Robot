@@ -56,8 +56,8 @@ public class OI {
 		moveCannonRight.whenReleased(new Cannon_MoveRight(0));
 		
 		feedBall = new JoystickButton(shootStick, 3);
-		feedBall.whileHeld(new Cannon_Feed(1));
-		feedBall.whenReleased(new Cannon_Feed(0));
+		feedBall.whileHeld(new Cannon_Feed(1, true));
+		feedBall.whenReleased(new Cannon_Feed(0, true));
 		
 		fireGroup = new JoystickButton(shootStick, 1);
 		fireGroup.whileHeld(new Group_Fire(1, true));
@@ -71,12 +71,12 @@ public class OI {
 		
 		
 		funnelBallForward = new JoystickButton(shootStick, 6);
-		funnelBallForward.whileHeld(new BallGrabber_Funnel(1));
-		funnelBallForward.whenReleased(new BallGrabber_Funnel(0));
+		funnelBallForward.whileHeld(new BallGrabber_Funnel(1, true));
+		funnelBallForward.whenReleased(new BallGrabber_Funnel(0, true));
 		
 		funnelBallBackward = new JoystickButton(shootStick, 7);
-		funnelBallBackward.whileHeld(new BallGrabber_Funnel(-1));
-		funnelBallBackward.whenReleased(new BallGrabber_Funnel(0));
+		funnelBallBackward.whileHeld(new BallGrabber_Funnel(-1, true));
+		funnelBallBackward.whenReleased(new BallGrabber_Funnel(0, true));
 		
 		
 		// Buttons for the GearGrabber

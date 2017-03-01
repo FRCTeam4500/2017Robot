@@ -23,6 +23,9 @@ public class Climber_Climb extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if(Robot.compressor.returnStatus() == true) {
+    		Robot.compressor.stopCompressor();
+    	}
     	Robot.climber.climb(speed);
     }
 

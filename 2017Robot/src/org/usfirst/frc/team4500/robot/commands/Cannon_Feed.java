@@ -10,11 +10,13 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Cannon_Feed extends Command {
 	
 	double speed = 0;
+	boolean fromTrigger;
 
-    public Cannon_Feed(double speed) {
+    public Cannon_Feed(double speed, boolean fromTrigger) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.cannon);
         this.speed = speed;
+        this.fromTrigger = fromTrigger;
     }
 
     // Called just before this Command runs the first time
@@ -28,7 +30,7 @@ public class Cannon_Feed extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return fromTrigger;
     }
 
     // Called once after isFinished returns true
