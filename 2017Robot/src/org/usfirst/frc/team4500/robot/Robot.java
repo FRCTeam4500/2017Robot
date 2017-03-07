@@ -9,6 +9,7 @@ import org.usfirst.frc.team4500.robot.subsystems.Cannon;
 import org.usfirst.frc.team4500.robot.subsystems.Climber;
 import org.usfirst.frc.team4500.robot.subsystems.DriveTrainPID;
 import org.usfirst.frc.team4500.robot.subsystems.GearGrabber;
+import org.usfirst.frc.team4500.robot.subsystems.GearPickup;
 import org.usfirst.frc.team4500.robot.subsystems.PneumaticsCompressor;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -27,6 +28,14 @@ import utilities.VisionClient;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
+
+
+/*
+ * TODO AT COMPITITION
+ * 1) Make sure the cannon works for auto
+ * 2) Make sure the camera works
+ * 3) Make sure the gear pickup works (Motor return ToF?)
+ */
 public class Robot extends IterativeRobot {
 	
 	//public static DriveTrain drivetrain;
@@ -38,6 +47,7 @@ public class Robot extends IterativeRobot {
 	public static BallGrabber ballgrabber;
 	public static GearGrabber geargrabber;
 	public static Climber climber;
+	public static GearPickup gearpickup;
 	
 	public static VisionClient visionServer;
 	public static SerialPort arduino;
@@ -60,6 +70,7 @@ public class Robot extends IterativeRobot {
 		geargrabber = new GearGrabber();
 		climber = new Climber();
 		compressor = new PneumaticsCompressor();
+		gearpickup = new GearPickup();
 		//arduino = new SerialPort(19200, SerialPort.Port.kUSB);
 		
 		/* Trys to enable the vision server and start a separate thread for it

@@ -1,22 +1,16 @@
 package org.usfirst.frc.team4500.robot;
 
-import org.usfirst.frc.team4500.robot.commands.Auto_Test;
-import org.usfirst.frc.team4500.robot.commands.Auto_VisionAdjustGear;
 import org.usfirst.frc.team4500.robot.commands.BallGrabber_Funnel;
 import org.usfirst.frc.team4500.robot.commands.BallGrabber_Grab;
 import org.usfirst.frc.team4500.robot.commands.Cannon_Feed;
 import org.usfirst.frc.team4500.robot.commands.Cannon_MoveLeft;
 import org.usfirst.frc.team4500.robot.commands.Cannon_MoveRight;
 import org.usfirst.frc.team4500.robot.commands.Climber_Climb;
-import org.usfirst.frc.team4500.robot.commands.DriveTrain_PIDMove;
-import org.usfirst.frc.team4500.robot.commands.GearGrabber_Extend;
-import org.usfirst.frc.team4500.robot.commands.GearGrabber_Grab;
 import org.usfirst.frc.team4500.robot.commands.GearGrabber_GrabberToggle;
-import org.usfirst.frc.team4500.robot.commands.GearGrabber_Letgo;
 import org.usfirst.frc.team4500.robot.commands.GearGrabber_PanelToggle;
-import org.usfirst.frc.team4500.robot.commands.GearGrabber_Retract;
 import org.usfirst.frc.team4500.robot.commands.Group_Fire;
-import org.usfirst.frc.team4500.robot.commands.Group_MoveByAngle;
+import org.usfirst.frc.team4500.robot.commands.Group_Pickup_Lift;
+import org.usfirst.frc.team4500.robot.commands.Group_Pickup_Pickup;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -38,6 +32,7 @@ public class OI {
 	Button grabberToggle, panelToggle;
 	Button climb;
 	Button pidMove, autoRun, gyroMove, gyroMove2;
+	Button gearPickupPlace, gearPickupGrab;
 	
 	Button visionAlign, visionAlign2;
 	
@@ -103,7 +98,11 @@ public class OI {
 		climb.whileHeld(new Climber_Climb(1));
 		climb.whenReleased(new Climber_Climb(0));
 		
-		pidMove = new JoystickButton(driveStick, 5);
+		// Buttons for the GearPickup
+		gearPickupGrab.whileHeld(new Group_Pickup_Pickup());
+		gearPickupGrab.whenReleased(new Group_Pickup_Lift());
+		
+		/*pidMove = new JoystickButton(driveStick, 5);
 		pidMove.whenPressed(new DriveTrain_PIDMove(5, 15));
 		
 		autoRun = new JoystickButton(driveStick, 6);
@@ -120,7 +119,7 @@ public class OI {
 		
 		//visionAlign2 = new JoystickButton(driveStick, 10);
 		//visionAlign2.whenPressed(new Auto_VisionAdjustGearPID(0, 10));
-		gyroMove2.whenPressed(new Group_MoveByAngle(180));
+		gyroMove2.whenPressed(new Group_MoveByAngle(180));*/
 	}
 	
 	/**

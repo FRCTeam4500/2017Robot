@@ -8,7 +8,7 @@ package org.usfirst.frc.team4500.robot;
  */
 public class RobotMap {
 	
-	// Motor ports
+	// PWM Motor ports
 	public static final int LMOTOR = 0, RMOTOR = 1;
 	
 	public static final int FSMOTOR = 3, BSMOTOR = 2;
@@ -21,10 +21,15 @@ public class RobotMap {
 	
 	public static final int FUNNELMOTOR = 9;
 	
+	// DIO Motor ports
+	public static final int PICKUPMOTOR = 0;
+	
 	// Pneumatic ports
 	public static final int GRABBERSOL_1 = 2, GRABBERSOL_2 = 3;
 	
 	public static final int PANELSOL_1 = 0, PANELSOL_2 = 1;
+	
+	public static final int PICKUPSOL_1 = 4, PICKUPSOL_2 = 5;
 	
 	public static final int COMPRESSOR = 0;
 	
