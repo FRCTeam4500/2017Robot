@@ -3,6 +3,10 @@ package org.usfirst.frc.team4500.robot;
 
 import java.io.IOException;
 
+import org.opencv.core.Mat;
+import org.opencv.core.Point;
+import org.opencv.core.Scalar;
+import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team4500.robot.commands.Auto_Test;
 import org.usfirst.frc.team4500.robot.subsystems.BallGrabber;
 import org.usfirst.frc.team4500.robot.subsystems.Cannon;
@@ -12,6 +16,10 @@ import org.usfirst.frc.team4500.robot.subsystems.GearGrabber;
 import org.usfirst.frc.team4500.robot.subsystems.GearPickup;
 import org.usfirst.frc.team4500.robot.subsystems.PneumaticsCompressor;
 
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Command;
@@ -77,13 +85,33 @@ public class Robot extends IterativeRobot {
 		 * If it encounters an error then it will through an IOException
 		 */
 		
-		try {
+		new Thread(() -> {
+            UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+            camera.setResolution(640, 480);
+            
+            // Get OpenCV access to a camera
+            CvSink cvSink = CameraServer.getInstance().getVideo(); 
+            
+            // Start a server that you need OpenCV image to
+            CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480); 
+            
+            Mat source = new Mat();
+            Mat output = new Mat();
+            
+            while(!Thread.interrupted()) {
+                cvSink.grabFrame(source);
+                Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2RGB);
+                Imgproc.line(output, new Point(320, 480), new Point(320, 0), new Scalar(255, 0, 0), 3);
+                outputStream.putFrame(output);
+            }
+        }).start();
+		/*try {
 			visionServer = new VisionClient((short) 3141);
 			Thread t = new Thread(visionServer);
 			t.start();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}*/
 		
 		oi = new OI();
 		
