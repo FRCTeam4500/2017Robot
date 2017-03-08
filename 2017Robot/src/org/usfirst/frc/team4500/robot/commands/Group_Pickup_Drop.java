@@ -1,5 +1,7 @@
 package org.usfirst.frc.team4500.robot.commands;
 
+import org.usfirst.frc.team4500.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -24,5 +26,8 @@ public class Group_Pickup_Drop extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+    	requires(Robot.gearpickup);
+    	addParallel(new Pickup_Extend());
+    	addSequential(new Pickup_MoveBySpeed(-1));
     }
 }

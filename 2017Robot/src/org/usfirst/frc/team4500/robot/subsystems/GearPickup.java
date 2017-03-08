@@ -47,6 +47,10 @@ public class GearPickup extends Subsystem {
     	//pickupMotor.set(false);
     	pickupMotor.set(0);
     }
+    
+    public void moveMotor(double speed) {
+    	pickupMotor.set(speed);
+    }
  
 }
 

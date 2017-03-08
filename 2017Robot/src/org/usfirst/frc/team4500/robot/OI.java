@@ -9,6 +9,7 @@ import org.usfirst.frc.team4500.robot.commands.Climber_Climb;
 import org.usfirst.frc.team4500.robot.commands.GearGrabber_GrabberToggle;
 import org.usfirst.frc.team4500.robot.commands.GearGrabber_PanelToggle;
 import org.usfirst.frc.team4500.robot.commands.Group_Fire;
+import org.usfirst.frc.team4500.robot.commands.Group_Pickup_Drop;
 import org.usfirst.frc.team4500.robot.commands.Group_Pickup_Lift;
 import org.usfirst.frc.team4500.robot.commands.Group_Pickup_Pickup;
 
@@ -35,7 +36,6 @@ public class OI {
 	Button gearPickupPlace, gearPickupGrab;
 	
 	Button visionAlign, visionAlign2;
-	
 	
 	public OI() {
 		driveStick = new Joystick(0);
@@ -101,6 +101,8 @@ public class OI {
 		// Buttons for the GearPickup
 		gearPickupGrab.whileHeld(new Group_Pickup_Pickup());
 		gearPickupGrab.whenReleased(new Group_Pickup_Lift());
+		gearPickupPlace.whileHeld(new Group_Pickup_Drop());
+		//gearPickupPlace.whenReleased(command);
 		
 		/*pidMove = new JoystickButton(driveStick, 5);
 		pidMove.whenPressed(new DriveTrain_PIDMove(5, 15));
