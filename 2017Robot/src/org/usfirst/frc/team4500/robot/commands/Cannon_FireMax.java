@@ -23,7 +23,11 @@ public class Cannon_FireMax extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.cannon.fireSpinup(speed);	
+    	if(speed != 0) {
+    		Robot.cannon.fireSpinup(-Robot.oi.getJoyScroll());	
+    	} else {
+    		Robot.cannon.fireSpinup(speed);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

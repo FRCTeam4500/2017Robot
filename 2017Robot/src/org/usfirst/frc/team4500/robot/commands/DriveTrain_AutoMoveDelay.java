@@ -7,11 +7,16 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Pickup_StopMotor extends Command {
+public class DriveTrain_AutoMoveDelay extends Command {
+	
+	double x, y, z;
 
-    public Pickup_StopMotor() {
+    public DriveTrain_AutoMoveDelay(double x, double y, double z) {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.geargrabber);
+    	this.x = x;
+    	this.y = y;
+    	this.z = z;
+        requires(Robot.drivetrain);
     }
 
     // Called just before this Command runs the first time
@@ -20,12 +25,12 @@ public class Pickup_StopMotor extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.geargrabber.moveMotor(0);
+    	Robot.drivetrain.omniDrive(x, y, z);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true

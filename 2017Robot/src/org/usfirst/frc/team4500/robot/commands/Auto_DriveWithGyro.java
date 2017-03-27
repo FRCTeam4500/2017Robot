@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Pickup_StopMotor extends Command {
+public class Auto_DriveWithGyro extends Command {
 
-    public Pickup_StopMotor() {
+    public Auto_DriveWithGyro() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.geargrabber);
+        requires(Robot.drivetrain);
     }
 
     // Called just before this Command runs the first time
@@ -20,12 +20,17 @@ public class Pickup_StopMotor extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.geargrabber.moveMotor(0);
+    	Robot.drivetrain.gyroCorrect();
+    	Robot.drivetrain.autoMoveForward();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        if(Robot.drivetrain.sonic.getRangeInches() > 5) {
+        	return false;
+        } else {
+        	return true;
+        }
     }
 
     // Called once after isFinished returns true

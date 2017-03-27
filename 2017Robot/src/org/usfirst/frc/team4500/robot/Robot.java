@@ -3,15 +3,23 @@ package org.usfirst.frc.team4500.robot;
 
 import java.io.IOException;
 
-import org.usfirst.frc.team4500.robot.commands.Auto_Test;
+import org.opencv.core.Mat;
+import org.opencv.core.Point;
+import org.opencv.core.Scalar;
+import org.opencv.imgproc.Imgproc;
+import org.usfirst.frc.team4500.robot.commands.Auto_Main;
 import org.usfirst.frc.team4500.robot.subsystems.BallGrabber;
 import org.usfirst.frc.team4500.robot.subsystems.Cannon;
 import org.usfirst.frc.team4500.robot.subsystems.Climber;
+import org.usfirst.frc.team4500.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4500.robot.subsystems.DriveTrainPID;
 import org.usfirst.frc.team4500.robot.subsystems.GearGrabber;
-import org.usfirst.frc.team4500.robot.subsystems.GearPickup;
 import org.usfirst.frc.team4500.robot.subsystems.PneumaticsCompressor;
 
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Command;
@@ -29,31 +37,23 @@ import utilities.VisionClient;
  * directory.
  */
 
-
-/*
- * TODO AT COMPITITION
- * 1) Make sure the cannon works for auto
- * 2) Make sure the camera works
- * 3) Make sure the gear pickup works (Motor return ToF?)
- */
 public class Robot extends IterativeRobot {
 	
-	//public static DriveTrain drivetrain;
+	public static DriveTrain drivetrain;
 	
 	public static PneumaticsCompressor compressor;
 	
-	public static DriveTrainPID drivetrain;
+	//public static DriveTrainPID drivetrain;
 	public static Cannon cannon;
 	public static BallGrabber ballgrabber;
 	public static GearGrabber geargrabber;
 	public static Climber climber;
-	public static GearPickup gearpickup;
 	
-	public static VisionClient visionServer;
-	public static SerialPort arduino;
+	//public static VisionClient visionServer;
+	//public static SerialPort arduino;
 	public static OI oi;
 
-	Command autonomousCommand;
+	Command mainCommand;
 	SendableChooser<Command> autoChooser = new SendableChooser<>();
 
 	/**
@@ -62,32 +62,54 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		//drivetrain = new DriveTrain();
-		drivetrain = new DriveTrainPID();
-		//autodrivetrain = new AutoDriveTrainPID();
+		drivetrain = new DriveTrain();
+		//drivetrain = new DriveTrainPID();
 		cannon = new Cannon();
 		ballgrabber = new BallGrabber();
 		geargrabber = new GearGrabber();
 		climber = new Climber();
 		compressor = new PneumaticsCompressor();
-		gearpickup = new GearPickup();
 		//arduino = new SerialPort(19200, SerialPort.Port.kUSB);
 		
 		/* Trys to enable the vision server and start a separate thread for it
 		 * If it encounters an error then it will through an IOException
 		 */
-		
-		try {
+				
+		/*try {
 			visionServer = new VisionClient((short) 3141);
 			Thread t = new Thread(visionServer);
 			t.start();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}*/
+		
+		CameraServer.getInstance().startAutomaticCapture(0);
+		CameraServer.getInstance().startAutomaticCapture(1);
+		/*new Thread(() -> {
+			UsbCamera cam0 = CameraServer.getInstance().startAutomaticCapture(0);
+			UsbCamera cam1 = CameraServer.getInstance().startAutomaticCapture(1);
+			cam0.setResolution(RobotMap.CV_IMAGE_WIDTH, RobotMap.CV_IMAGE_HEIGHT);
+			cam1.setResolution(160, 120);
+			
+			CvSink cvSink = CameraServer.getInstance().getVideo(cam0);
+			
+			CvSource outputStream = CameraServer.getInstance().putVideo("blur", RobotMap.CV_IMAGE_WIDTH, RobotMap.CV_IMAGE_HEIGHT);
+			
+			Mat source = new Mat();
+			Mat output = new Mat();
+			
+			while(!Thread.interrupted()) {
+				cvSink.grabFrame(source);
+				Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2RGB);
+				Imgproc.line(output, new Point(RobotMap.CV_IMAGE_WIDTH/2-10, RobotMap.CV_IMAGE_HEIGHT), new Point(RobotMap.CV_IMAGE_WIDTH/2-10, 0), new Scalar(255, 0, 0), 3);
+				outputStream.putFrame(output);
+			}
+		}).start();*/
 		
 		oi = new OI();
 		
-		autoChooser.addDefault("Default", new Auto_Test());
+		autoChooser.addDefault("Default", new Auto_Main());
+		mainCommand = new Auto_Main();
 	}
 
 	/**
@@ -118,7 +140,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = autoChooser.getSelected();
+		//autonomousCommand = autoChooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -127,9 +149,9 @@ public class Robot extends IterativeRobot {
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
 
-		// schedule the autonomous command (example)
-		if (autonomousCommand != null)
-			autonomousCommand.start();
+		// schedule the autonomous command (example) 
+		if (mainCommand != null)
+			mainCommand.start();
 	}
 
 	/**
@@ -146,13 +168,9 @@ public class Robot extends IterativeRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		if (autonomousCommand != null)
-			autonomousCommand.cancel();
-		//Robot.drivetrain.lEncoder.reset();
-		//Robot.drivetrain.rEncoder.reset();
-		//Robot.drivetrain.gyro.reset();
+		if (mainCommand != null)
+			mainCommand.cancel();
 		Robot.drivetrain.gyro.reset();
-		//Robot.cannon.resetEncoder();
 	}
 
 	/**
@@ -167,13 +185,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Gyro", Robot.drivetrain.getGyroAngle());
 		SmartDashboard.putNumber("UltasonicVal", Robot.drivetrain.sonic.getRangeInches());
 		//RobotMap.vData = visionServer.getData();
-        SmartDashboard.putNumber("Server data", visionServer.getData()); 
-        //SmartDashboard.putNumber("Server data", RobotMap.vData);
-        //SmartDashboard.putNumber("lEncoder.get", Robot.drivetrain.lEncoder.get());
-        //SmartDashboard.putNumber("lEncoder.getInches", Functions.encoderPulseToInches(Robot.drivetrain.lEncoder.get()));
-        //SmartDashboard.putNumber("rEncoder.get", Robot.drivetrain.rEncoder.get()); 
-        //SmartDashboard.putNumber("rEncoder.getInches", Functions.encoderPulseToInches(Robot.drivetrain.rEncoder.get())); 
-		//SmartDashboard.putNumber("cannonEncoder", Robot.cannon.cannonEncoder.get());
+        //SmartDashboard.putNumber("Server data", visionServer.getData()); 
 		Scheduler.getInstance().run();
 	}
 

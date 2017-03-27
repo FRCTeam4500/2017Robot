@@ -1,16 +1,15 @@
 package org.usfirst.frc.team4500.robot.commands;
 
 import org.usfirst.frc.team4500.robot.Robot;
-import org.usfirst.frc.team4500.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class Auto_Test extends CommandGroup {
+public class Group_Pickup_Drop_Stop extends CommandGroup {
 
-    public Auto_Test() {
+    public Group_Pickup_Drop_Stop() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -27,20 +26,8 @@ public class Auto_Test extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	requires(Robot.drivetrain);
     	requires(Robot.geargrabber);
-    
-    	//addSequential(new Auto_VisionAdjustGear(RobotMap.vData));
-    	addSequential(new DriveTrain_ResetGyro());
-    	addSequential(new DriveTrain_PIDMove(3, 4));
-    	addSequential(new Wait(0.8));
-    	addSequential(new GearGrabber_Letgo());
-    	addSequential(new Wait(0.8));
-    	addSequential(new DriveTrain_PIDMove(40, 42));
-    	addSequential(new GearGrabber_Grab());
-    	addSequential(new Wait(0.5));
-    	addSequential(new Group_Fire(1, false));
-    	
-    	//addSequential(new DriveTrain_RotateByDegrees(180));
+    	addSequential(new Pickup_Retract());
+    	addParallel(new Pickup_MoveBySpeed(0));
     }
 }
