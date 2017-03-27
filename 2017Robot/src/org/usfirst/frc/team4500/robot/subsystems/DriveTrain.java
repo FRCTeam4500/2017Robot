@@ -18,12 +18,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class DriveTrain extends Subsystem {
 	
-	private Talon lOmni, rOmni;
-	private Spark fsOmni, bsOmni;
+	public Talon lOmni, rOmni;
+	public Spark fsOmni, bsOmni;
 	
 	public ADXRS450_Gyro gyro;
 	
-	public Encoder lEncoder, rEncoder;
+	//public Encoder lEncoder, rEncoder;
 	
 	public Ultrasonic sonic;
 	
@@ -61,6 +61,32 @@ public class DriveTrain extends Subsystem {
 		return gyro.getAngle();
 	}
     
+    public void resetGyro() {
+    	gyro.reset();
+    }
+
+    
+    public void gyroCorrect() {
+    	if(gyro.getAngle() > 0.20 || gyro.getAngle() < -0.20) { // 0.25
+    		if(gyro.getAngle() > 0) {
+    			//lOmni.set(0.1); // 0.1
+    			//rOmni.set(0.1);
+    			bsOmni.set(-0.325); //bs is fs
+    			fsOmni.set(-0.250); // 292
+    		} else {
+    			//lOmni.set(-0.1);
+    			//rOmni.set(-0.1);
+    			bsOmni.set(0.325);
+    			fsOmni.set(0.250);
+    		}
+    	}
+    }
+    
+    public void autoMoveForward() {
+    	lOmni.set(-1/2.5); // o/3
+    	rOmni.set(1/2.5);
+    }
+    
     /**
      * Function for driving the robot. If there is no twist then move forward, backwards or strafe
      * If there is twist then rotate the robot.
@@ -69,41 +95,10 @@ public class DriveTrain extends Subsystem {
      * @param joyTwist
      */
     public void omniDrive(double x, double y, double z) {
-    	
-    	lOmni.set(y);
-    	rOmni.set(-y);
-    	fsOmni.set(-x+z);
+    	lOmni.set(y-z*.5);
+    	rOmni.set(-y-z*.5);
+    	fsOmni.set(-x+z );
     	bsOmni.set(x+z);
-    	
-    	/*if(x == 0 && y == 0 && (z > 0.8 || z < -0.8)) {
-    		lOmni.set(-z);
-    		rOmni.set(-z);
-    	} else {
-    		lOmni.set(y+z*.5);
-        	rOmni.set(-y-z*.5);
-        	fsOmni.set(-x+z*.9);
-        	bsOmni.set(x+z*.9);*/
-    	
-    	
-    	/*if(joyTwist > 0.3 || joyTwist < -0.3) {
-    		fsOmni.set(-joyX);
-    		bsOmni.set(joyX);
-    		lOmni.set(-joyTwist);
-    		rOmni.set(-joyTwist);
-    	} else {
-    		fsOmni.set(-joyX);
-    		bsOmni.set(joyX);
-    		lOmni.set(joyY);
-    		rOmni.set(-joyY);
-    	}*/
-    }
-    
-    public void resetLeftEncoder() {
-    	lEncoder.reset();
-    }
-    
-    public void resetRightEncoder() {
-    	rEncoder.reset();
     }
 }
 

@@ -27,7 +27,7 @@ public class Auto_VisionAdjustGear extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(firstRun == true) {
-    		data = Robot.visionServer.getData();
+    		//data = Robot.visionServer.getData();
     		firstRun = false;
     	}
     	SmartDashboard.putNumber("cmd data", data);
@@ -43,11 +43,11 @@ public class Auto_VisionAdjustGear extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	double distLeft = 0;
-    	if(Robot.visionServer.getData() > 320) {
+    	/*if(Robot.visionServer.getData() > 320) {
     		distLeft = Robot.visionServer.getData() - 320;
     	} else {
     		distLeft = 320 - Robot.visionServer.getData();
-    	}
+    	}*/
     	SmartDashboard.putNumber("cmd stop", distLeft);
     	if(distLeft < 10 && distLeft > -10) {
     		firstRun = true;

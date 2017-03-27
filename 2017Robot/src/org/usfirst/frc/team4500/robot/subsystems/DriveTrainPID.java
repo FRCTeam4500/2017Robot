@@ -34,7 +34,7 @@ public class DriveTrainPID extends PIDSubsystem {
     	gyro = new ADXRS450_Gyro(); 	
     	
     	sonic = new Ultrasonic(RobotMap.SONAR_OUTPUT, RobotMap.SONAR_INPUT);
-    	sonic.setAutomaticMode(true);
+    	sonic.setAutomaticMode(true); 
         // Use these to get going:
         //setSetpoint(5);
         //setInputRange(2, 8);//-  Sets where the PID controller should move the system
@@ -93,6 +93,11 @@ public class DriveTrainPID extends PIDSubsystem {
     		}
     	}
     }
+    
+    public void autoMoveForward() {
+    	lOmni.set(-1/2.5); // o/3
+    	rOmni.set(1/2.5);
+    }
 
     protected void usePIDOutput(double output) {
         // Use output to drive your system, like a motor
@@ -132,9 +137,15 @@ public class DriveTrainPID extends PIDSubsystem {
     }
     
     public void omniDrive(double x, double y, double z) {
-    	lOmni.set(y);
-    	rOmni.set(-y);
-    	fsOmni.set(-x+z);
+    	/*
+    	 * Fixes
+    	 * 1) Only twist on Y
+    	 * 2) Deadzone? Might be to small if past 0.6
+    	 * 3) Reducing the twist (z/n)
+    	 */
+    	lOmni.set(y-z*.5); // V-z
+    	rOmni.set(-y-z*.5);
+    	fsOmni.set(-x+z ); //V+z
     	bsOmni.set(x+z);
     }
     
