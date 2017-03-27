@@ -74,7 +74,7 @@ public class Robot extends IterativeRobot {
 		/* Trys to enable the vision server and start a separate thread for it
 		 * If it encounters an error then it will through an IOException
 		 */
-				
+
 		/*try {
 			visionServer = new VisionClient((short) 3141);
 			Thread t = new Thread(visionServer);
@@ -82,7 +82,7 @@ public class Robot extends IterativeRobot {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}*/
-		
+  
 		CameraServer.getInstance().startAutomaticCapture(0);
 		CameraServer.getInstance().startAutomaticCapture(1);
 		/*new Thread(() -> {
