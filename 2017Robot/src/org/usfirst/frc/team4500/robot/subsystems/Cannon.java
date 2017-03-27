@@ -25,12 +25,12 @@ public class Cannon extends Subsystem {
 		fireMotor = new Talon(RobotMap.FIREMOTOR);
 		feedMotor = new Talon(RobotMap.FEEDMOTOR);
 		
-		cannonEncoder = new Encoder(RobotMap.CANNON_ENCODER_1, RobotMap.CANNON_ENCODER_2);
+		//cannonEncoder = new Encoder(RobotMap.CANNON_ENCODER_1, RobotMap.CANNON_ENCODER_2);
 	}
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new Cannon_Spinup());
+        //setDefaultCommand(new Cannon_Spinup());
     }
     
     public void resetEncoder() {

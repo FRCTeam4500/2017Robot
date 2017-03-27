@@ -14,7 +14,7 @@ public class Pickup_MoveBySpeed extends Command {
     public Pickup_MoveBySpeed(double speed) {
         // Use requires() here to declare subsystem dependencies
     	this.speed = speed;
-        requires(Robot.gearpickup);
+        requires(Robot.geargrabber);
     }
 
     // Called just before this Command runs the first time
@@ -23,7 +23,7 @@ public class Pickup_MoveBySpeed extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.gearpickup.moveMotor(speed);
+    	Robot.geargrabber.moveMotor(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

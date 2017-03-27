@@ -26,8 +26,8 @@ public class Group_Pickup_Pickup extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	requires(Robot.gearpickup);
-    	addSequential(new Pickup_StartMotor());
+    	requires(Robot.geargrabber);
+    	addSequential(new Pickup_MoveBySpeed(1));
     	addSequential(new Pickup_Extend());
     }
 }

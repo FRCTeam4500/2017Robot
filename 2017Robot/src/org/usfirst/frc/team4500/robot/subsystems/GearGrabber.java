@@ -3,6 +3,7 @@ package org.usfirst.frc.team4500.robot.subsystems;
 import org.usfirst.frc.team4500.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -15,10 +16,12 @@ public class GearGrabber extends Subsystem {
     // here. Call these from Commands.
 	private DoubleSolenoid grabber;
 	private DoubleSolenoid panel;
+	private Talon pickupMotor;
 	
 	public GearGrabber() {
 		grabber = new DoubleSolenoid(RobotMap.GRABBERSOL_1, RobotMap.GRABBERSOL_2);
 		panel = new DoubleSolenoid(RobotMap.PANELSOL_1, RobotMap.PANELSOL_2);
+		pickupMotor = new Talon(RobotMap.BALLGRABMOTOR);
 		
 		//grabber.set(Value.kForward);
 		//panel.set(Value.kForward);
@@ -65,6 +68,22 @@ public class GearGrabber extends Subsystem {
     	} else {
     		panel.set(Value.kReverse);
     	}
+    }
+    
+    
+    
+    
+    
+    public void solExtend() {
+    	grabber.set(Value.kForward);
+    }
+    
+    public void solRetract() {
+    	grabber.set(Value.kReverse);
+    }
+    
+    public void moveMotor(double speed) {
+    	pickupMotor.set(speed);
     }
 }
 

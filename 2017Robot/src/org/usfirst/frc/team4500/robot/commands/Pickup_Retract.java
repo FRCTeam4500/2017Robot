@@ -11,7 +11,7 @@ public class Pickup_Retract extends Command {
 
     public Pickup_Retract() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.gearpickup);
+        requires(Robot.geargrabber);
     }
 
     // Called just before this Command runs the first time
@@ -20,7 +20,7 @@ public class Pickup_Retract extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.gearpickup.solRetract();
+    	Robot.geargrabber.solRetract();
     }
 
     // Make this return true when this Command no longer needs to run execute()

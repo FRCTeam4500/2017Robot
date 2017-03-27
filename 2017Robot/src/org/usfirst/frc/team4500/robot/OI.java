@@ -2,7 +2,6 @@ package org.usfirst.frc.team4500.robot;
 
 import org.usfirst.frc.team4500.robot.commands.BallGrabber_Funnel;
 import org.usfirst.frc.team4500.robot.commands.BallGrabber_Grab;
-import org.usfirst.frc.team4500.robot.commands.Cannon_Feed;
 import org.usfirst.frc.team4500.robot.commands.Cannon_MoveLeft;
 import org.usfirst.frc.team4500.robot.commands.Cannon_MoveRight;
 import org.usfirst.frc.team4500.robot.commands.Climber_Climb;
@@ -10,6 +9,7 @@ import org.usfirst.frc.team4500.robot.commands.GearGrabber_GrabberToggle;
 import org.usfirst.frc.team4500.robot.commands.GearGrabber_PanelToggle;
 import org.usfirst.frc.team4500.robot.commands.Group_Fire;
 import org.usfirst.frc.team4500.robot.commands.Group_Pickup_Drop;
+import org.usfirst.frc.team4500.robot.commands.Group_Pickup_Drop_Stop;
 import org.usfirst.frc.team4500.robot.commands.Group_Pickup_Lift;
 import org.usfirst.frc.team4500.robot.commands.Group_Pickup_Pickup;
 
@@ -32,7 +32,7 @@ public class OI {
 	Button extendPanel, retractPanel;
 	Button grabberToggle, panelToggle;
 	Button climb;
-	Button pidMove, autoRun, gyroMove, gyroMove2;
+	//Button pidMove, autoRun, gyroMove, gyroMove2;
 	Button gearPickupPlace, gearPickupGrab;
 	
 	Button visionAlign, visionAlign2;
@@ -41,18 +41,21 @@ public class OI {
 		driveStick = new Joystick(0);
 		shootStick = new Joystick(1);
 		
+		gearPickupPlace = new JoystickButton(driveStick, 11);
+		gearPickupGrab = new JoystickButton(driveStick, 1);
+		
 		// Buttons for the Cannon subsystem
 		moveCannonLeft = new JoystickButton(shootStick, 4);
-		moveCannonLeft.whileHeld(new Cannon_MoveLeft(0.3));
+		moveCannonLeft.whileHeld(new Cannon_MoveLeft(0.5));
 		moveCannonLeft.whenReleased(new Cannon_MoveLeft(0));
 		
 		moveCannonRight = new JoystickButton(shootStick, 5);
-		moveCannonRight.whileHeld(new Cannon_MoveRight(-0.3));
+		moveCannonRight.whileHeld(new Cannon_MoveRight(-0.5));
 		moveCannonRight.whenReleased(new Cannon_MoveRight(0));
 		
-		feedBall = new JoystickButton(shootStick, 3);
+		/*feedBall = new JoystickButton(shootStick, 3);
 		feedBall.whileHeld(new Cannon_Feed(1, true));
-		feedBall.whenReleased(new Cannon_Feed(0, true));
+		feedBall.whenReleased(new Cannon_Feed(0, true));*/
 		
 		fireGroup = new JoystickButton(shootStick, 1);
 		fireGroup.whileHeld(new Group_Fire(1, true));
@@ -81,8 +84,8 @@ public class OI {
 		//letGoGear = new JoystickButton(shootStick, 7);
 		//letGoGear.whenPressed(new GearGrabber_Letgo());
 		
-		grabberToggle = new JoystickButton(shootStick, 10);
-		grabberToggle.whenPressed(new GearGrabber_GrabberToggle());
+		//grabberToggle = new JoystickButton(shootStick, 10);
+		//grabberToggle.whenPressed(new GearGrabber_GrabberToggle());
 		
 		panelToggle = new JoystickButton(shootStick, 11);
 		panelToggle.whenPressed(new GearGrabber_PanelToggle());
@@ -94,7 +97,7 @@ public class OI {
 		//retractPanel.whenPressed(new GearGrabber_Retract()); 
 		
 		// Buttons for the Climber
-		climb = new JoystickButton(shootStick, 9);
+		climb = new JoystickButton(shootStick, 3);
 		climb.whileHeld(new Climber_Climb(1));
 		climb.whenReleased(new Climber_Climb(0));
 		
@@ -102,7 +105,7 @@ public class OI {
 		gearPickupGrab.whileHeld(new Group_Pickup_Pickup());
 		gearPickupGrab.whenReleased(new Group_Pickup_Lift());
 		gearPickupPlace.whileHeld(new Group_Pickup_Drop());
-		//gearPickupPlace.whenReleased(command);
+		gearPickupPlace.whenReleased(new Group_Pickup_Drop_Stop());
 		
 		/*pidMove = new JoystickButton(driveStick, 5);
 		pidMove.whenPressed(new DriveTrain_PIDMove(5, 15));
@@ -119,8 +122,8 @@ public class OI {
 		visionAlign = new JoystickButton(driveStick, 9);
 		visionAlign.whenPressed(new Auto_VisionAdjustGear(Robot.visionServer.getData()));
 		
-		//visionAlign2 = new JoystickButton(driveStick, 10);
-		//visionAlign2.whenPressed(new Auto_VisionAdjustGearPID(0, 10));
+		visionAlign2 = new JoystickButton(driveStick, 10);
+		visionAlign2.whenPressed(new Auto_VisionAdjustGearPID(0, 10));
 		gyroMove2.whenPressed(new Group_MoveByAngle(180));*/
 	}
 	
@@ -131,15 +134,12 @@ public class OI {
 	public double getJoyX() {
 		double xSquared = driveStick.getX();
 		if(xSquared > 0) {
-			// ? is the ternary opperator
+			// Ternary Operator:
 			// condition ? if true : if false
 			return (Math.abs(driveStick.getX()) < RobotMap.DEADZONE) ? 0 : Math.pow(driveStick.getX(), 2);
 		} else {
 			return (Math.abs(driveStick.getX()) < RobotMap.DEADZONE) ? 0 : xSquared*-xSquared;
 		}
-		
-		//return (Math.abs(driveStick.getX()) < RobotMap.DEADZONE) ? 0 : driveStick.getX();
-		//return (Math.abs(driveStick.getX()) < RobotMap.DEADZONE) ? 0 : Math.pow(driveStick.getX(), 2);
 	}
 
 	/**
@@ -153,7 +153,6 @@ public class OI {
 		} else {
 			return (Math.abs(driveStick.getY()) < RobotMap.DEADZONE) ? 0 : ySquared*-ySquared;
 		}
-		//return (Math.abs(driveStick.getY()) < RobotMap.DEADZONE) ? 0 : driveStick.getY();
 	}
 
 	/**
@@ -162,14 +161,12 @@ public class OI {
 	 */
 	public double getJoyTwist() {
 		double twist = driveStick.getTwist();
-		if(twist > 0){
-			return (Math.abs(driveStick.getTwist()) < RobotMap.TWISTDEADZONE) ? 0 : Math.pow(Functions.cvtRange(0.6, 1, 0, 1, driveStick.getTwist()), 2);
+		double finalTwist = (Math.abs(driveStick.getTwist()) < RobotMap.TWISTDEADZONE) ? 0 : Math.pow(Functions.cvtRange(0.6, 1, 0, 1, Math.abs(driveStick.getTwist())), 2);
+		if( twist < 0) {
+			return finalTwist *-1;
 		} else {
-			twist = Functions.cvtRange(-0.6, -1, 0, -1, driveStick.getTwist());
-			return (Math.abs(driveStick.getTwist()) < RobotMap.TWISTDEADZONE) ? 0 : twist * -twist;
+			return finalTwist;
 		}
-		//return ((Math.abs(driveStick.getTwist()) < RobotMap.DEADZONE) ? 0 : driveStick.getTwist());
-		//return (Math.abs(driveStick.getTwist()) < RobotMap.TWISTDEADZONE) ? 0 : Math.pow(Functions.cvtRange(0.6, 1, 0, 1, driveStick.getTwist()), 2);
 	}
 	
 	/**
@@ -177,8 +174,6 @@ public class OI {
 	 * @return The value of the scroll in the range 0-1
 	 */
 	public double getJoyScroll() {
-		//return ((shootStick.getZ()-(-1))*1)/2;
-		//return shootStick.getZ();
 		return Functions.cvtRange(-1, 1, 0, 1, shootStick.getZ());
 	}
 }
